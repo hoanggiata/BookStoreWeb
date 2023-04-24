@@ -1,0 +1,505 @@
+﻿
+@{
+    ViewData["Title"] = "News";
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <!-- SLICK JS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <link href="@Url.Content("~/css/base.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/css/grid.css")" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/css/partial/blog.css")">
+    <link rel="stylesheet" href="@Url.Content("~/css/partial/category.css")">
+}
+
+
+<section id="home" class="section top-part">
+    <div class="container home">
+
+        <div class="slider home-slider">
+            <div class="slide">
+                <img src="~/IMG/source/banner/blog-banner.png" alt="" class="home-img">
+            </div>
+        </div>
+    </div>
+</section>
+<!-- CODE HERE -->
+<section class="section">
+
+    <div class="container">
+
+        <div class="row">
+
+            <!-- CATEGORY -->
+            <div class="col l-3 m-0 c-0">
+
+                <nav class="category">
+                    <h3 class="category-header">
+                        <i class="fas fa-list-ul"></i>
+                        Danh mục
+                    </h3>
+                    <ul class="category-list">
+                        <li class="category-item"><a href="#" class="category-item-link">Khoa học - Kỹ thuật</a></li>
+                        <li class="category-item"><a href="#" class="category-item-link">Trinh thám</a></li>
+                        <li class="category-item"><a href="#" class="category-item-link">Viễn tưởng</a></li>
+                        <li class="category-item"><a href="#" class="category-item-link">Ngôn tình</a></li>
+                        <li class="category-item active"><a href="#" class="category-item-link">Triết lí</a></li>
+                        <li class="category-item"><a href="#" class="category-item-link">Học đường</a></li>
+                        <li class="category-item"><a href="#" class="category-item-link">Kinh dị</a></li>
+                        <li class="category-item"><a href="#" class="category-item-link">Nhân văn</a></li>
+                        <li class="category-item"><a href="#" class="category-item-link">Thiếu nhi</a></li>
+                    </ul>
+                </nav>
+
+            </div>
+
+            <!-- BLOGS -->
+            <div class="col l-9 m-12 c-12">
+
+                <div class="blog-content">
+
+                    <div class="blog-top">
+                        <a href="~/Views/pages/chi-tiet-tin-tuc/01-hai-mat-cua-gia-dinh.html" class="blog-img-cover">
+                            <img src="~/IMG/blogs/blog-01-hai-mat-gia-dinh/blog-01-1.png" alt="" class="blog-img">
+                        </a>
+                    </div>
+
+                    <div class="blog-info">
+                        <div>
+                            <a href="~/Views/pages/chi-tiet-tin-tuc/01-hai-mat-cua-gia-dinh.html">
+                                <p class="blog-title">Hai Mặt Của Gia Đình – chữa lành những tổn thương xuất phát từ gia đình</p>
+                            </a>
+                            <p class="blog-text">
+                                Với nhiều người trong chúng ta, gia đình là nơi nuôi nấng, vỗ về, là điểm tựa để
+                                chúng ta luôn quay về khi gặp giông bão trong cuộc sống. Thế nhưng, có những người kém may mắn hơn, họ
+                                không thể dựa vào gia đình, hay bất hạnh hơn, gia đình chính là nơi gây cho họ nhiều thương tổn sâu
+                                sắc trong tâm hồn.
+                            </p>
+                        </div>
+                        <a class="blog-btn" href="~/Views/pages/chi-tiet-tin-tuc/01-hai-mat-cua-gia-dinh.html">
+                            Đọc
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="blog-content part">
+
+                    <div class="blog-top">
+                        <a href="~/Views/pages/chi-tiet-tin-tuc/02-goc-khuat-cua-yeu-thuong.html" class="blog-img-cover">
+                            <img src="~/IMG/blogs/blog-02-goc-khuat-cua-yeu-thuong/blog-02-1.jpg" alt="" class="blog-img">
+                        </a>
+                    </div>
+
+                    <div class="blog-info">
+                        <div>
+                            <a href="~/Views/pages/chi-tiet-tin-tuc/02-goc-khuat-cua-yeu-thuong.html">
+                                <p class="blog-title">Góc Khuất Của Yêu Thương – hiểu để biết cách yêu</p>
+                            </a>
+                            <p class="blog-text">
+                                Tình yêu là điều kỳ diệu mà tạo hóa ban tặng cho con người. Những cảm xúc tuyệt vời
+                                này khiến chúng ta say mê, đắm chìm trong hạnh phúc; nhưng cũng chính tình yêu có thể nhẫn tâm đẩy ta
+                                xuống hố sâu tuyệt vọng.
+                            </p>
+                        </div>
+                        <a class="blog-btn" href="~/Views/pages/chi-tiet-tin-tuc/02-goc-khuat-cua-yeu-thuong.html">
+                            Đọc <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="blog-content part">
+
+                    <div class="blog-top">
+                        <a href="~/Views/pages/chi-tiet-tin-tuc/03-chu-nghia-toi-gian.html" class="blog-img-cover">
+                            <img src="~/IMG/blogs/blog-03-chu-nghia-toi-gian/blog-03-1.png" alt="" class="blog-img">
+                        </a>
+                    </div>
+
+                    <div class="blog-info">
+                        <div>
+                            <a href="~/Views/pages/chi-tiet-tin-tuc/03-chu-nghia-toi-gian.html">
+                                <p class="blog-title">Một Cuốn Sách Về Chủ Nghĩa Tối Giản – hơn cả tối giản, đó là sự thay đổi</p>
+                            </a>
+                            <p class="blog-text">
+                                Nói đến chủ nghĩa tối giản, nhiều người nghĩ đó là thói quen vứt bỏ đồ đạc vô tội
+                                vạ, nhà cửa trống huếch như một gia đình vô sản. Đến với cuốn sách Một Cuốn Sách Về Chủ Nghĩa Tối
+                                Giản của Chi Nguyễn, bạn sẽ có những khái niệm bản chất về chủ nghĩa này, biết cách điều chỉnh sự tối
+                                giản sao cho phù hợp với văn hóa Việt Nam, và quan trọng nhất, là đạt được sự thư thái, bình an trong
+                                tâm hồn.
+                            </p>
+                        </div>
+                        <a class="blog-btn" href="~/Views/pages/chi-tiet-tin-tuc/03-chu-nghia-toi-gian.html">
+                            Đọc <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="blog-content part">
+
+                    <div class="blog-top">
+                        <a href="~/Views/pages/chi-tiet-tin-tuc/04-chi-so-vuot-kho.html" class="blog-img-cover">
+                            <img src="~/IMG/blogs/blog-04-chi-so-vuot-kho/blog-04-2.jpg" alt="" class="blog-img">
+                        </a>
+                    </div>
+
+                    <div class="blog-info">
+                        <div>
+                            <a href="~/Views/pages/chi-tiet-tin-tuc/04-chi-so-vuot-kho.html">
+                                <p class="blog-title">AQ Chỉ Số Vượt Khó – yếu tố cốt lõi ảnh hưởng đến thành công</p>
+                            </a>
+                            <p class="blog-text">
+                                Điều gì làm nên ranh giới giữa người thành công và kẻ thất bại? Trí thông minh, sức
+                                khỏe tốt, khả năng điều khiển cảm xúc hay còn gì  hơn thế. 
+                            </p>
+                        </div>
+                        <a class="blog-btn" href="~/Views/pages/chi-tiet-tin-tuc/04-chi-so-vuot-kho.html">
+                            Đọc <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="blog-content part">
+
+                    <div class="blog-top">
+                        <a href="~/Views/pages/chi-tiet-tin-tuc/05-ga-nghien-giay.html" class="blog-img-cover">
+                            <img src="~/IMG/blogs/blog-05-ga-nghien-giay/blog-05-1.jpg" alt="" class="blog-img">
+                        </a>
+                    </div>
+
+                    <div class="blog-info">
+                        <div>
+                            <a href="~/Views/pages/chi-tiet-tin-tuc/05-ga-nghien-giay.html">
+                                <p class="blog-title">Gã Nghiện Giày – tự truyện của nhà sáng lập Nike</p>
+                            </a>
+                            <p class="blog-text">
+                                Nike, Inc. – một tập đoàn đa quốc gia nổi tiếng bậc nhất thế giới trong lĩnh vực
+                                sản xuất và kinh doanh các mặt hàng thể thao, với doanh thu hàng năm lên đến 40 tỷ USD, trở thành một
+                                biểu tượng thể thao được yêu thích trên toàn thế giới. Ít ai biết, đằng sau câu chuyện thành công của
+                                tập đoàn này là bao mồ hôi nước mắt, bao cay đắng của nhà sáng lập Phil Knight. 
+                            </p>
+                        </div>
+                        <a class="blog-btn" href="~/Views/pages/chi-tiet-tin-tuc/05-ga-nghien-giay.html">
+                            Đọc <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="blog-content part">
+
+                    <div class="blog-top">
+                        <a href="~/Views/pages/chi-tiet-tin-tuc/06-cang-ky-luat-cang-tu-do.html" class="blog-img-cover">
+                            <img src="~/IMG/blogs/blog-06-cang-ky-luat-cang-tu-do/blog-06-1.jpg" alt="" class="blog-img">
+                        </a>
+                    </div>
+
+                    <div class="blog-info">
+                        <div>
+                            <a href="~/Views/pages/chi-tiet-tin-tuc/06-cang-ky-luat-cang-tu-do.html">
+                                <p class="blog-title">Càng Kỷ Luật Càng Tự Do – truyền động lực cho những người lười biếng</p>
+                            </a>
+                            <p class="blog-text">
+                                “Chúng ta đều phải chịu đựng một trong hai thứ: sự đau đớn của kỷ luật hay sự đau
+                                đớn của hối tiếc hoặc thất vọng.” Sự khác biệt của người thành công hay thất bại không phải ở trí tuệ,
+                                ở thể chất, mà ở khả năng sống kỷ luật của mỗi cá nhân.
+                            </p>
+                        </div>
+                        <a class="blog-btn" href="~/Views/pages/chi-tiet-tin-tuc/06-cang-ky-luat-cang-tu-do.html">
+                            Đọc <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="blog-content part">
+
+                    <div class="blog-top">
+                        <a href="~/Views/pages/chi-tiet-tin-tuc/07-wabi-sabi.html" class="blog-img-cover">
+                            <img src="~/IMG/blogs/blog-07-wabi-sabi/blog-07-1.jpg" alt="" class="blog-img">
+                        </a>
+                    </div>
+
+                    <div class="blog-info">
+                        <div>
+                            <a href="~/Views/pages/chi-tiet-tin-tuc/07-wabi-sabi.html">
+                                <p class="blog-title">Wabi Sabi – Thương Những Điều Không Hoàn Hảo</p>
+                            </a>
+                            <p class="blog-text">
+                                Càng chìm đắm trong lối sống tiêu thụ, trong dư dả vật chất thì càng có nhiều người
+                                muốn quay về cuộc sống tối giản, nguyên bản và gần gũi hơn với thiên nhiên. Bạn có khi nào chậm lại
+                                một phút và nhận ra mình đã lao đi quá nhanh mà không kịp tận hưởng những điều nhỏ bé tốt đẹp của thế
+                                giới tự nhiên?
+                            </p>
+                        </div>
+                        <a class="blog-btn" href="~/Views/pages/chi-tiet-tin-tuc/07-wabi-sabi.html">
+                            Đọc <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+
+                </div>
+
+
+
+
+                <!-- PAGINATION -->
+                <div class="pagination">
+                    <ul class="pagi-list">
+                        <li>
+                            <a class="pagi-btn-prev prev"><i class="fas fa-chevron-left"></i></a>
+                        </li>
+
+                        <li class="page-num active"><a>1</a></li>
+                        <li class="page-num"><a>2</a></li>
+                        <li class="page-num"><a>3</a></li>
+                        <li class="page-num"><a>4</a></li>
+                        <li class="page-num"><a>5</a></li>
+                        <li class="page-num"><a>6</a></li>
+
+                        <li>
+                            <a class="pagi-btn-next next">
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SIDEBAR MENU FOR MB&TBL -->
+<div class="mb-menu">
+    <input type="checkbox" class="key-sb" id="key-sb-menu" style="display: none;">
+    <label for="key-sb-menu" class="sidebar">
+        <h2>+</h2>
+    </label>
+    <label for="key-sb-menu" class="over-lay"></label>
+    <div class="menu-sidebar">
+        <label for="key-sb-menu" class="close-sb">
+            <i class="fas fa-times"></i>
+        </label>
+        <div>
+            <nav class="category">
+                <h3 class="category-header">
+                    <i class="fas fa-list-ul"></i>
+                    Danh mục
+                </h3>
+                <ul class="category-list">
+                    <li class="category-item"><a href="#" class="category-item-link">Khoa học - Kỹ thuật</a></li>
+                    <li class="category-item"><a href="#" class="category-item-link">Trinh thám</a></li>
+                    <li class="category-item"><a href="#" class="category-item-link">Viễn tưởng</a></li>
+                    <li class="category-item"><a href="#" class="category-item-link">Ngôn tình</a></li>
+                    <li class="category-item active"><a href="#" class="category-item-link">Tâm lí</a></li>
+                    <li class="category-item"><a href="#" class="category-item-link">Học đường</a></li>
+                    <li class="category-item"><a href="#" class="category-item-link">Kinh dị</a></li>
+                    <li class="category-item"><a href="#" class="category-item-link">Nhân văn</a></li>
+                    <li class="category-item"><a href="#" class="category-item-link">Thiếu nhi</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!-- RECOMMEND -->
+<section class="section">
+
+    <div class="container">
+        <div class="sub-info" style="text-align: left;">
+            <p class="sub-title">Bài viết liên quan</p>
+            <!-- <p class="sub-text">Lorem ipsum dolor sit amet !</p> -->
+        </div>
+    </div>
+
+    <div class="container">
+
+        <nav class="category" style="padding-top: 1rem;">
+            <ul class="category-list">
+
+                <li class="category-item">
+                    <div class="relate-blog-top">
+                        <div class="relate-blog-info">
+                            <a href="~/Views/pages/chi-tiet-tin-tuc/08-mat-phai.html">
+                                <p class="relate-blog-title">Mặt Phải – đi tìm những cơ hội tiềm ẩn trong cuộc sống</p>
+                            </a>
+                            <p class="relate-blog-text">
+                                Người ta nói, chuyện gì cũng có hai mặt. Và tương tự thế, mọi biến cố xảy ra
+                                trong đời chúng ta đều đem đến thách thức, nhưng chắc chắn không bỏ qua những cơ hội song hành.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="relate-blog-bottom">
+                        <span class="relate-blog-tag">Tiểu thuyết</span>
+                        <span class="relate-blog-tag">Kỹ năng sống</span>
+                    </div>
+                </li>
+
+                <li class="category-item">
+                    <div class="relate-blog-top">
+                        <div class="relate-blog-info">
+                            <a href="~/Views/pages/chi-tiet-tin-tuc/09-tat-ca-deu-la-chuyen-nho.html">
+                                <p class="relate-blog-title">Tất Cả Chỉ Là Chuyện Nhỏ – chuyện lớn hóa nhỏ, chuyện nhỏ hóa không</p>
+                            </a>
+                            <p class="relate-blog-text">
+                                Rất nhiều người ước họ có 48 tiếng mỗi ngày để xoay sở hết mọi công việc.
+                                Việc ở nhà, việc ở trường, việc ở công ty rồi 101 thứ việc phát sinh làm chúng ta quên mất việc thực
+                                sự sống và tận hưởng cuộc sống này.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="relate-blog-bottom">
+                        <span class="relate-blog-tag">Văn học</span>
+                        <span class="relate-blog-tag">Kỹ năng sống</span>
+                    </div>
+                </li>
+
+                <li class="category-item">
+                    <div class="relate-blog-top">
+                        <div class="relate-blog-info">
+                            <a href="~/Views/pages/chi-tiet-tin-tuc/10-minh-la-ca.html">
+                                <p class="relate-blog-title">Mình Là Cá, Việc Của Mình Là Bơi – cứ bơi đi vì cuộc đời cho phép</p>
+                            </a>
+                            <p class="relate-blog-text">
+                                Mình Là Cá, Việc Của Mình Là Bơi của tác giả Takeshi Furukawa là một cuốn
+                                sách self-help hướng bạn tới một cuộc sống tích cực. Sách chia sẻ 9 thói quen vàng giúp chúng ta nhìn
+                                nhận mọi thứ xung quanh với ánh mắt vui vẻ, lạc quan và thêm tin yêu vào chính bản thân mình.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="relate-blog-bottom">
+                        <span class="relate-blog-tag">Kỹ năng sống</span>
+                    </div>
+                </li>
+
+                <li class="category-item">
+                    <div class="relate-blog-top">
+                        <div class="relate-blog-info">
+                            <a href="~/Views/pages/chi-tiet-tin-tuc/11-nghe-thuat-kaize-tuyet-voi-cua-toyota.html">
+                                <p class="relate-blog-title">
+                                    Nghệ Thuật Kaizen Tuyệt Vời Của Toyota – học hỏi kinh nghiệm từ doanh
+                                    nghiệp hàng đầu thế giới
+                                </p>
+                            </a>
+                            <p class="relate-blog-text">
+                                Là một trong những tập đoàn lớn nhất Nhật Bản, góp phần đưa đất nước này trở
+                                thành con rồng châu Á và vươn mình ra toàn thế giới, tập đoàn Toyota có những bài học kinh nghiệm đáng
+                                để cho chúng ta học tập, nghiên cứu và áp dụng vào cuộc sống, kinh doanh.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="relate-blog-bottom">
+                        <span class="relate-blog-tag">Văn học</span>
+                        <span class="relate-blog-tag">Kỹ năng sống</span>
+                    </div>
+                </li>
+
+                <li class="category-item">
+                    <div class="relate-blog-top">
+                        <div class="relate-blog-info">
+                            <a href="~/Views/pages/chi-tiet-tin-tuc/chi-tiet-tin-tuc.html">
+                                <p class="relate-blog-title">
+                                    Cuộc Cách Mạng Một Cọng Rơm – hành trình theo đuổi nông nghiệp thuận tự
+                                    nhiên
+                                </p>
+                            </a>
+                            <p class="relate-blog-text">
+                                Trên thế giới, xu hướng nông nghiệp thuận tự nhiên đã trở nên phổ biến từ
+                                những năm cuối của thế kỷ 20. Ở Việt Nam, việc quay về áp dụng nông nghiệp thuận tự nhiên mới chỉ trở
+                                nên quen thuộc trong những năm gần đây, khi mà người tiêu dùng quá ngán ngẩm trước thực phẩm bị đầu
+                                độc bởi dư lượng lớn thuốc trừ sâu, phân bón hóa học.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="relate-blog-bottom">
+                        <span class="relate-blog-tag">Kinh doanh</span>
+                        <span class="relate-blog-tag">Kỹ năng sống</span>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+
+    </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="section" id="newsletter">
+    <div class="container newsletter">
+        <div class="info reveal">
+            <p class="subtitle">Newsletter</p>
+            <h1 class="title">Đăng Ký Nhận Tin</h1>
+            <p class="text">Đăng ký email ngay hôm nay để nhận ngay những thông tin giảm giá, khuyến mãi mới nhất</p>
+        </div>
+        <div class="newsletter-form reveal">
+            <i class="fas fa-envelope newsletter-icon"></i>
+            <input type="text" class="newsletter-input" placeholder="Shio@gamil.com">
+            <a href="" class="btn newsletter-btn">Đăng Ký</a>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="l-footer">
+
+    <div class="container l-grid footer section reveal">
+
+        <div class="footer-content">
+            <a href="" class="footer-logo">
+                <img src="~/IMG/source/logo.png" alt="">
+            </a>
+            <p class="footer-text">Kết nối tri thức & trái tim</p>
+            <div class="footer-social">
+                <i class="fab fa-youtube"></i>
+                <i class="fab fa-facebook-f"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-twitter"></i>
+            </div>
+        </div>
+
+        <div class="footer-content">
+            <p class="footer-title">GIỚI THIỆU</p>
+            <ul class="footer-menu">
+                <a href="./index.html" class="footer-link">Trang chủ</a>
+                <a href="./pages/san-pham.html" class="footer-link">Sản phẩm</a>
+                <a href="./pages/tin-tuc.html" class="footer-link">Tin tức</a>
+                <a href="./pages/lien-he.html" class="footer-link">Liên hệ</a>
+            </ul>
+        </div>
+
+        <div class="footer-content">
+            <p class="footer-title">CHÍNH SÁCH CÔNG TY</p>
+            <ul class="footer-menu">
+                <a href="" class="footer-link">Chính sách giao nhận</a>
+                <a href="" class="footer-link">Chính sách đổi trả</a>
+                <a href="" class="footer-link">Phương thức thanh toán</a>
+                <a href="" class="footer-link">Chế độ bảo hành</a>
+            </ul>
+        </div>
+
+        <div class="footer-content">
+            <p class="footer-title">HỖ TRỢ KHÁCH HÀNG</p>
+            <ul class="footer-menu">
+                <a href="" class="footer-link">Hotline: (+84 28) 38 632 052</a>
+                <a href="" class="footer-link">Gửi yêu cầu đổi hàng</a>
+                <a href="" class="footer-link">P. Kinh doanh: sales@gobook.com.vn</a>
+                <a href="" class="footer-link">P. Hỗ trợ khách hàng: support@gobook.com.vn</a>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <div class="container footer-copyright">
+            <p>All rights reserved by &copy; GOBOOK creative 2021</p>
+        </div>
+    </div>
+
+</footer>
+

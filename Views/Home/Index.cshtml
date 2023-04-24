@@ -1,0 +1,546 @@
+﻿@model List<BookStoreWeb.Models.Book>
+@{
+    ViewData["Title"] = "Trang chủ | GoBook";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link href="@Url.Content("~/css/base.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/css/homepage.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/css/contact.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/css/partial/book.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/css/partial/blog.css")" rel="stylesheet" type="text/css" />
+    <!-- FONTAWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <!-- SLICK JS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    var top4list = Model.Take(4).ToList();
+}
+
+<!-- HOME -->
+<section id="home" class="section top-part">
+    <div class="container home reveal">
+
+        <div class="slider home-slider">
+            <div class="slide">
+                <img src="~/IMG/source/banner/banner-1.jpg" alt="" class="home-img">
+            </div>
+            <div class="slide">
+                <img src="~/IMG/source/banner/banner-2.jpg" alt="" class="home-img">
+            </div>
+            <div class="slide">
+                <img src="~/IMG/source/banner/banner-3.jpg" alt="" class="home-img">
+            </div>
+            <div class="slide">
+                <img src="~/IMG/source/banner/banner-4.jpg" alt="" class="home-img">
+            </div>
+            <div class="slide">
+                <img src="~/IMG/source/banner/banner-5.jpg" alt="" class="home-img">
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- FEATURE -->
+<section id="feature" class="section">
+    <div class="container l-grid feature">
+
+        <div class="feature-content reveal">
+            <i class="fas fa-truck icon"></i>
+            <div class="feature-info">
+                <div class="feature-title">Vận chuyển</div>
+                <div class="feature-text">Free ship đơn hàng trên 150k</div>
+            </div>
+        </div>
+
+        <div class="feature-content reveal">
+            <i class="fas fa-headphones-alt icon"></i>
+            <div class="feature-info">
+                <div class="feature-title">Hỗ trợ</div>
+                <div class="feature-text">Sẵn sàng hỗ trợ 24/7</div>
+            </div>
+        </div>
+
+        <div class="feature-content reveal">
+            <i class="far fa-credit-card icon"></i>
+            <div class="feature-info">
+                <div class="feature-title">Thanh toán</div>
+                <div class="feature-text">Thanh toán đa dạng và an toàn</div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ABOUT -->
+<section id="about" class="section">
+    <div class="container about l-grid">
+
+        <div class="info about-info reveal">
+            <p class="subtitle">GoBook</p>
+            <h1 class="title">Kết nối tri thức & trái tim</h1>
+            <p class="text">
+                GoBook là trang thương mại điện tử, hệ thống nhà sách thân thuộc của nhiều gia đình Việt kể từ
+                nhà sách GoBook đầu tiên vào năm 2015
+            </p>
+            <p class="text">
+                Đến với không gian mua sắm trực tuyến GoBook, khách hàng có thể dễ dàng tìm thấy
+                những cuốn sách hay, đa thể loại của nhiều nhà xuất bản, công ty sách trong và ngoài nước cùng nhiều dụng cụ
+                học tập, văn phòng phẩm, quà lưu niệm, đồ chơi giáo dục chính hãng của những thương hiệu uy tín. Cùng tiêu chí
+                không ngừng hoàn thiện, nâng cao chất lượng sản phẩm, dịch vụ
+            </p>
+            <a href="/Views/pages/contact.cshtml" class="btn">Liên hệ</a>
+        </div>
+
+        <div class="img about-img reveal">
+            <img src="~/IMG/source/home/dot.png" alt="" class="dot-img">
+            <img src="~/IMG/source/home/bookstore.jpg" alt="" class="image">
+            <div class="stat">
+                <div class="stat-content">
+                    <h1 class="stat-title"> <span class="counter">5</span> năm</h1>
+                    <p class="stat-text"><i class="fas fa-landmark"></i> Thành lập</p>
+                </div>
+                <div class="stat-content">
+                    <h1 class="stat-title"> <span class="counter">40.000</span> +</h1>
+                    <p class="stat-text"><i class="fas fa-user"></i> Khách hàng</p>
+                </div>
+                <div class="stat-content">
+                    <h1 class="stat-title"> <span class="counter">15.000</span> +</h1>
+                    <p class="stat-text"><i class="fas fa-book"></i> Đầu sách</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- BEST SELLER -->
+<section id="best-seller" class="section">
+
+    <div class="container reveal">
+
+        <div class="info">
+            <p class="subtitle">Best seller</p>
+            <h1 class="title">Sách Nổi Bật</h1>
+            <!-- <p class="text">Lorem ipsum dolor sit amet conse adipi elit.</p> -->
+        </div>
+
+    </div>
+
+    <div class="container l-grid best-seller">
+
+        @foreach(Book item in top4list)
+        {
+            <div class="bestSeller-content reveal">
+                <img src="@item.Imageurl" alt="" class="bestSeller-img">
+                <div class="bestSeller-info">
+                    <a asp-action="ProductDetail" asp-controller="Product" asp-route-id="@item.IdBook" asp-route-cate="@item.IdCate" class="bestSeller-title">@item.NameBook</a>
+                    <p class="bestSeller-author">Phil Knight</p>
+                    <div class="bestSeller-reviews">
+                        <p class="bestSeller-buy"># <i class="fas fa-shopping-cart"></i></p>
+                        <p class="bestSeller-star"># <i class="fas fa-star"></i></p>
+                        <p class="bestSeller-comment"># <i class="fas fa-comments"></i></p>
+                    </div>
+                    <p class="bestSeller-price">@item.Newcash đ<span>@item.Oldcash đ</span> </p>
+                    @*<a href="@Url.Action("ChiTietSanPham","Home",new {id = 1})" class="btn">Mua ngay</a>*@
+                    <a asp-action="ProductDetail" asp-controller="Product" asp-route-id="@item.IdBook" asp-route-cate="@item.IdCate" class="btn">Mua ngay</a>
+                </div>
+            </div>
+        }
+        
+
+      @*  <div class="bestSeller-content reveal">
+            <img src="~/IMG/books/book-02-goc-khuat-cua-yeu-thuong/book-02-1.jpg" alt="" class="bestSeller-img">
+            <div class="bestSeller-info">
+                <a href="./pages/chi-tiet-san-pham/02-goc-khuat-cua-yeu-thuong.html" class="bestSeller-title">
+                    Góc Khuất Của Yêu
+                    Thương
+                </a>
+                <p class="bestSeller-author">Choi Kwanghyun</p>
+                <div class="bestSeller-reviews">
+                    <p class="bestSeller-buy">2479 <i class="fas fa-shopping-cart"></i></p>
+                    <p class="bestSeller-star">5 <i class="fas fa-star"></i></p>
+                    <p class="bestSeller-comment">824 <i class="fas fa-comments"></i></p>
+                </div>
+                <p class="bestSeller-price">66,600đ <span>98.000đ</span> </p>
+                <a href="./pages/chi-tiet-san-pham/02-goc-khuat-cua-yeu-thuong.html" class="btn">Mua ngay</a>
+            </div>
+        </div>
+
+        <div class="bestSeller-content reveal">
+            <img src="~/IMG/books/book-06-cang-ky-luat-cang-tu-do/book-06-1.jpg" alt="" class="bestSeller-img">
+            <div class="bestSeller-info">
+                <a href="./pages/chi-tiet-san-pham/06-cang-ky-luat-cang-tu-do.html" class="bestSeller-title">
+                    Càng kỹ luật càng
+                    tự do
+                </a>
+                <p class="bestSeller-author">Ca Tây</p>
+                <div class="bestSeller-reviews">
+                    <p class="bestSeller-buy">894 <i class="fas fa-shopping-cart"></i></p>
+                    <p class="bestSeller-star">4.9 <i class="fas fa-star"></i></p>
+                    <p class="bestSeller-comment">409 <i class="fas fa-comments"></i></p>
+                </div>
+                <p class="bestSeller-price">74.200đ <span>109.000đ</span> </p>
+                <a href="./pages/chi-tiet-san-pham/06-cang-ky-luat-cang-tu-do.html" class="btn">Mua ngay</a>
+            </div>
+        </div>
+
+        <div class="bestSeller-content reveal">
+            <img src="~/IMG/books/book-07-wabi-sabi/book-07-1.jpg" alt="" class="bestSeller-img">
+            <div class="bestSeller-info">
+                <a href="./pages/chi-tiet-san-pham/07-wabi-sabi.html" class="bestSeller-title">Wabi Sabi</a>
+                <p class="bestSeller-author">Beth Kempton</p>
+                <div class="bestSeller-reviews">
+                    <p class="bestSeller-buy">725 <i class="fas fa-shopping-cart"></i></p>
+                    <p class="bestSeller-star">4.8 <i class="fas fa-star"></i></p>
+                    <p class="bestSeller-comment">381 <i class="fas fa-comments"></i></p>
+                </div>
+                <p class="bestSeller-price">79.200đ <span>99.000đ</span> </p>
+                <a href="./pages/chi-tiet-san-pham/07-wabi-sabi.html" class="btn">Mua ngay</a>
+            </div>
+        </div>*@
+
+    </div>
+
+</section>
+
+
+<!-- NEWEST -->
+<section id="newest" class="section">
+
+    <div class="container">
+        <div class="info reveal">
+            <p class="subtitle">Newest</p>
+            <h1 class="title">Sách Mới Nhất</h1>
+            <!-- <p class="text">Lorem ipsum dolor sit amet conse adipi elit.</p> -->
+        </div>
+    </div>
+
+    <div class="container newest slider newest-slider">
+        @foreach(Book item in Model)
+        {
+            <div class="book">
+                <a asp-action="ProductDetail" asp-controller="Product" asp-route-id="@item.IdBook" asp-route-cate="@item.IdCate">
+                    <div class="book-top">
+                        <img src="@item.Imageurl" class="book-img">
+                        @*<img src="~/IMG/source/freeship.png" alt="" class="freeship-tag">*@
+                    </div>
+                    <div class="book-bottom">
+                        <p class="book-title">@item.NameBook</p>
+                        <div class="book-reviews">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <div class="book-info">
+                            <p class="book-price">@item.Newcash đ</p>
+                            <div class="tag sale-tag">@item.Dealpercent%</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+</section>
+
+
+<!-- BLOG -->
+<section id="blog" class="section">
+
+    <div class="container">
+        <div class="info reveal">
+            <p class="subtitle">Our Blog</p>
+            <h1 class="title">Review Sách</h1>
+        </div>
+    </div>
+
+    <div class="container blog slider blog-slider reveal">
+
+        <div class="blog-home-content">
+
+            <div class="blog-top">
+                <a href="./pages/chi-tiet-tin-tuc/01-hai-mat-cua-gia-dinh.html" class="blog-img-cover">
+                    <img src="~/IMG/blogs/blog-01-hai-mat-gia-dinh/blog-01-1.png" alt="" class="blog-home-img">
+                </a>
+            </div>
+
+            <div class="blog-info blog-home-info">
+                <div>
+                    <a href="./pages/chi-tiet-tin-tuc/01-hai-mat-cua-gia-dinh.html">
+                        <p class="blog-title" style="font-size: var(--title-size);">
+                            Hai Mặt Của Gia Đình – chữa lành những tổn
+                            thương xuất phát từ gia đình
+                        </p>
+                    </a>
+                    <p class="blog-text" style="font-size: var(--subtext-size);">
+                        Với nhiều người trong chúng ta, gia đình là nơi
+                        nuôi nấng, vỗ về, là điểm tựa để
+                        chúng ta luôn quay về khi gặp giông bão trong cuộc sống. Thế nhưng, có những người kém may mắn hơn, họ
+                        không thể dựa vào gia đình, hay bất hạnh hơn, gia đình chính là nơi gây cho họ nhiều thương tổn sâu
+                        sắc trong tâm hồn.
+                    </p>
+                </div>
+                <a class="blog-btn" href="./pages/chi-tiet-tin-tuc/01-hai-mat-cua-gia-dinh.html" style="margin: 2rem 0;">
+                    Đọc
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+            </div>
+
+        </div>
+
+        <div class="blog-home-content">
+
+            <div class="blog-top">
+                <a href="./pages/chi-tiet-tin-tuc/02-goc-khuat-cua-yeu-thuong.html" class="blog-img-cover">
+                    <img src="~/IMG/blogs/blog-02-goc-khuat-cua-yeu-thuong/blog-02-1.jpg" alt="" class="blog-home-img">
+                </a>
+            </div>
+
+            <div class="blog-info blog-home-info">
+                <div>
+                    <a href="./pages/chi-tiet-tin-tuc/02-goc-khuat-cua-yeu-thuong.html">
+                        <p class="blog-title" style="font-size: var(--title-size);">
+                            Góc Khuất Của Yêu Thương – hiểu để biết cách
+                            yêu
+                        </p>
+                    </a>
+                    <p class="blog-text" style="font-size: var(--subtext-size);">
+                        Tình yêu là điều kỳ diệu mà tạo hóa ban tặng
+                        cho con người. Những cảm xúc tuyệt vời
+                        này khiến chúng ta say mê, đắm chìm trong hạnh phúc; nhưng cũng chính tình yêu có thể nhẫn tâm đẩy ta
+                        xuống hố sâu tuyệt vọng.
+                    </p>
+                </div>
+                <a class="blog-btn" href="./pages/chi-tiet-tin-tuc/02-goc-khuat-cua-yeu-thuong.html" style="margin: 2rem 0;">
+                    Đọc <i class="fas fa-chevron-right"></i>
+                </a>
+            </div>
+
+        </div>
+
+        <div class="blog-home-content">
+
+            <div class="blog-top">
+                <a href="./pages/chi-tiet-tin-tuc/03-chu-nghia-toi-gian.html" class="blog-img-cover">
+                    <img src="~/IMG/blogs/blog-03-chu-nghia-toi-gian/blog-03-1.png" alt="" class="blog-home-img">
+                </a>
+            </div>
+
+            <div class="blog-info blog-home-ìno">
+                <div>
+                    <a href="./pages/chi-tiet-tin-tuc/03-chu-nghia-toi-gian.html">
+                        <p class="blog-title" style="font-size: var(--title-size);">
+                            Một Cuốn Sách Về Chủ Nghĩa Tối Giản – hơn cả
+                            tối giản, đó là sự thay đổi
+                        </p>
+                    </a>
+                    <p class="blog-text" style="font-size: var(--subtext-size);">
+                        Nói đến chủ nghĩa tối giản, nhiều người nghĩ đó
+                        là thói quen vứt bỏ đồ đạc vô tội
+                        vạ, nhà cửa trống huếch như một gia đình vô sản. Đến với cuốn sách Một Cuốn Sách Về Chủ Nghĩa Tối
+                        Giản của Chi Nguyễn, bạn sẽ có những khái niệm bản chất về chủ nghĩa này, biết cách điều chỉnh sự tối
+                        giản sao cho phù hợp với văn hóa Việt Nam, và quan trọng nhất, là đạt được sự thư thái, bình an trong
+                        tâm hồn.
+                    </p>
+                </div>
+                <a class="blog-btn" href="./pages/chi-tiet-tin-tuc/03-chu-nghia-toi-gian.html" style="margin: 2rem 0;">
+                    Đọc <i class="fas fa-chevron-right"></i>
+                </a>
+            </div>
+
+        </div>
+
+        <div class="blog-home-content">
+
+            <div class="blog-top">
+                <a href="./pages/chi-tiet-tin-tuc/04-chi-so-vuot-kho.html" class="blog-img-cover">
+                    <img src="~/IMG/blogs/blog-04-chi-so-vuot-kho/blog-04-2.jpg" alt="" class="blog-home-img">
+                </a>
+            </div>
+
+            <div class="blog-info blog-home-info">
+                <div>
+                    <a href="./pages/chi-tiet-tin-tuc/04-chi-so-vuot-kho.html">
+                        <p class="blog-title" style="font-size: var(--title-size);">
+                            AQ Chỉ Số Vượt Khó – yếu tố cốt lõi ảnh hưởng
+                            đến thành công
+                        </p>
+                    </a>
+                    <p class="blog-text" style="font-size: var(--subtext-size);">
+                        Điều gì làm nên ranh giới giữa người thành công
+                        và kẻ thất bại? Trí thông minh, sức
+                        khỏe tốt, khả năng điều khiển cảm xúc hay còn gì  hơn thế. 
+                    </p>
+                </div>
+                <a class="blog-btn" href="./pages/chi-tiet-tin-tuc/04-chi-so-vuot-kho.html" style="margin: 2rem 0;">
+                    Đọc <i class="fas fa-chevron-right"></i>
+                </a>
+            </div>
+
+        </div>
+
+        <div class="blog-home-content">
+
+            <div class="blog-top">
+                <a href="./pages/chi-tiet-tin-tuc/05-ga-nghien-giay.html" class="blog-img-cover">
+                    <img src="~/IMG/blogs/blog-05-ga-nghien-giay/blog-05-1.jpg" alt="" class="blog-home-img">
+                </a>
+            </div>
+
+            <div class="blog-info blog-home-info">
+                <div>
+                    <a href="./pages/chi-tiet-tin-tuc/05-ga-nghien-giay.html">
+                        <p class="blog-title" style="font-size: var(--title-size);">
+                            Gã Nghiện Giày – tự truyện của nhà sáng lập
+                            Nike
+                        </p>
+                    </a>
+                    <p class="blog-text" style="font-size: var(--subtext-size);">
+                        Nike, Inc. – một tập đoàn đa quốc gia nổi tiếng
+                        bậc nhất thế giới trong lĩnh vực
+                        sản xuất và kinh doanh các mặt hàng thể thao, với doanh thu hàng năm lên đến 40 tỷ USD, trở thành một
+                        biểu tượng thể thao được yêu thích trên toàn thế giới. Ít ai biết, đằng sau câu chuyện thành công của
+                        tập đoàn này là bao mồ hôi nước mắt, bao cay đắng của nhà sáng lập Phil Knight. 
+                    </p>
+                </div>
+                <a class="blog-btn" href="./pages/chi-tiet-tin-tuc/05-ga-nghien-giay.html" style="margin: 2rem 0;">
+                    Đọc <i class="fas fa-chevron-right"></i>
+                </a>
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- BRAND -->
+<section id="brand" class="section">
+    <div class="container l-grid brand reveal">
+
+        <div class="brand-content">
+            <img src="~/IMG/source/brand/bloom_book.png" alt="" style="width: 10rem; height: 10rem;" class="brand-img">
+            <img class="brand-overlay" src="~/IMG/source/brand/bloom_book_overlay.png" alt=""
+                 style="width: 10rem; height: 10rem;">
+        </div>
+
+        <div class="brand-content">
+            <img src="~/IMG/source/brand/nha_nam.png" alt="" style="width: 11rem; height: 10rem;" class="brand-img">
+            <img class="brand-overlay" src="~/IMG/source/brand/nha_nam_overlay.png" alt=""
+                 style="width: 11rem; height: 10rem;">
+        </div>
+
+        <div class="brand-content">
+            <img src="~/IMG/source/brand/kim_dong.png" alt="" style="width: 8rem; height: 10rem;" class="brand-img">
+            <img class="brand-overlay" src="~/IMG/source/brand/kim_dong_overlay.png" alt=""
+                 style="width: 8rem; height: 10rem;">
+        </div>
+
+        <div class="brand-content">
+            <img src="~/IMG/source/brand/nxb_tre.png" alt="" style="width: 14.5rem; height: 10rem;" class="brand-img">
+            <img class="brand-overlay" src="~/IMG/source/brand/nxb_tre_overlay.png" alt=""
+                 style="width: 14.5rem; height: 10rem;">
+        </div>
+
+        <div class="brand-content">
+            <img src="~/IMG/source/brand/shine_book.png" alt="" style="width: 14rem; height: 10rem;" class="brand-img">
+            <img class="brand-overlay" src="~/IMG/source/brand/shine_book_overlay.png" alt=""
+                 style="width: 14rem; height: 10rem;">
+        </div>
+
+    </div>
+</section>
+
+
+<!-- NEWSLETTER -->
+<section class="section" id="newsletter">
+    <div class="container newsletter">
+        <div class="info reveal">
+            <p class="subtitle">Newsletter</p>
+            <h1 class="title">Đăng Ký Nhận Tin</h1>
+            <p class="text">Đăng ký email ngay hôm nay để nhận ngay những thông tin giảm giá, khuyến mãi mới nhất</p>
+        </div>
+        <div class="newsletter-form reveal">
+            <i class="fas fa-envelope newsletter-icon"></i>
+            <input type="text" class="newsletter-input" placeholder="Shio@gamil.com">
+            <a href="" class="btn newsletter-btn">Đăng Ký</a>
+        </div>
+    </div>
+</section>
+
+
+ <!-- FOOTER -->
+    <footer class="l-footer">
+
+        <div class="container l-grid footer section reveal">
+
+            <div class="footer-content">
+                <a href="" class="footer-logo">
+                    <img src="~/IMG/source/logo.png" alt="">
+                </a>
+                <p class="footer-text">Kết nối tri thức & trái tim</p>
+                <div class="footer-social">
+                    <i class="fab fa-youtube"></i>
+                    <i class="fab fa-facebook-f"></i>
+                    <i class="fab fa-instagram"></i>
+                    <i class="fab fa-twitter"></i>
+                </div>
+            </div>
+
+            <div class="footer-content">
+                <p class="footer-title">GIỚI THIỆU</p>
+                <ul class="footer-menu">
+                    <a href="./index.html" class="footer-link">Trang chủ</a>
+                    <a href="./pages/san-pham.html" class="footer-link">Sản phẩm</a>
+                    <a asp-action="Index" asp-controller="News" class="footer-link">Tin tức</a>
+                    <a asp-action="Contact" asp-asp-controller="Home" class="footer-link">Liên hệ</a>
+                </ul>
+            </div>
+
+            <div class="footer-content">
+                <p class="footer-title">CHÍNH SÁCH CÔNG TY</p>
+                <ul class="footer-menu">
+                    <a href="" class="footer-link">Chính sách giao nhận</a>
+                    <a href="" class="footer-link">Chính sách đổi trả</a>
+                    <a href="" class="footer-link">Phương thức thanh toán</a>
+                    <a href="" class="footer-link">Chế độ bảo hành</a>
+                </ul>
+            </div>
+
+            <div class="footer-content">
+                <p class="footer-title">HỖ TRỢ KHÁCH HÀNG</p>
+                <ul class="footer-menu">
+                    <a href="" class="footer-link">Hotline: (+84 28) 38 632 052</a>
+                    <a href="" class="footer-link">Gửi yêu cầu đổi hàng</a>
+                    <a href="" class="footer-link">P. Kinh doanh: sales@gobook.com.vn</a>
+                    <a href="" class="footer-link">P. Hỗ trợ khách hàng: support@gobook.com.vn</a>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container footer-copyright">
+                <p>All rights reserved by &copy; GOBOOK creative 2021</p>
+            </div>
+        </div>
+
+    </footer>
+
+<a href="#top" class="scroll-top">
+    <i class="fas fa-arrow-up"></i>
+</a>
+
+
+<!-- JQUERY  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- SLICK JS -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+<script src="~/js/app.js"></script>
+<script src="~/js/slider.js"></script>

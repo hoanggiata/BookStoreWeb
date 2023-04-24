@@ -1,0 +1,584 @@
+﻿@model BookStoreWeb.Models.Book
+
+@{
+    ViewData["Title"] = "ProductDetail";
+    <link href="@Url.Content("~/css/base.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/css/grid.css")" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/css/partial/book.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/css/product-detail.css")">
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <!-- SLICK JS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <!-- COMMENTS -->
+    <link rel="stylesheet" href="~/js/comments/css/jquery-comments.css">
+
+    List<Book> books = new List<Book>();
+    Book temp = new Book();
+    books = temp.GetBookExById(Model.IdBook);
+
+    //string content = File.ReadAllText(@"C:\Users\hoanggia\Desktop\TaiLieuHTML-CSS\DoAnWebNangCao\BookStoreWeb\wwwroot\Text\DesBook.txt");
+    
+}
+
+<div class="section top-part">
+
+    <div class="container section">
+
+        <div class="row">
+
+            <!-- PRODUCT IMAGE -->
+            <div class="col l-5 m-5 c-12">
+
+                <div class="slider product-detail-slider-top single-product-slider">
+
+
+                    @* @foreach (var item in Model.imageBook)
+                    {
+                    <div class="single-product-img">
+                    <img src="@Url.Content(item)" alt="Image"/>
+                    </div>
+                    } *@
+                    @{
+                        foreach(var item in ViewBag.images)
+                        {
+                            <div class="single-product-img">
+                                @{
+                                    var url = "/IMG/books/" + Model.IdCate.ToString()+"/" + Model.IdBook.ToString()+"/" + item;
+                                }
+                                <img src="@url" alt="Image" />
+                            </div>
+                        }
+                    }
+
+                </div>
+
+                <div class="slider product-detail-slider-bottom navs-product-slider">
+
+                    @* <div class="navs-product-img">
+                    <img src="../../img/books/book-01-hai-mat-gia-dinh/book-01-1.png">
+                    <div class="navs-product-img-bg"></div>
+                    </div>
+                    @foreach (var item in Model.imageBook)
+                    {
+                    <div class="navs-product-img">
+                    <img src="@Url.Content(item)" alt="Image"/>
+                    <div class="navs-product-img-bg"></div>
+                    </div>
+                    }    *@
+                    @{
+                        foreach (var item in ViewBag.images)
+                        {
+                            
+                            <div class="navs-product-img">
+                                @{
+                                    var url = "/IMG/books/" + Model.IdCate.ToString() + "/" + Model.IdBook.ToString() + "/" + item;
+                                }
+                                <img src="@url" alt="Image" />
+                                <div class="navs-product-img-bg"></div>
+                            </div>
+                        }
+                    }
+
+                </div>
+
+            </div>
+
+            <!-- PRODUCT INFO -->
+            <div class="col l-7 m-7 c-12">
+                <div class="info-header">
+                    <h6 class="author">Tác giả: <a href="#">@Model.Author</a></h6>
+                    <h2 class="book-name">@Model.NameBook</h2>
+                    <div class="rate-star">
+                        <div class="book-reviews" style="cursor: pointer;">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p class="num-rate">(12032 đánh giá)</p>
+                        <p class="num-sell">Đã bán 10000+</p>
+                    </div>
+                </div>
+                <div class="info-body">
+                    <div class="price">
+                        <div class="book-info">
+                            <p class="book-price">@Model.Newcash</p>
+                            <p class="old-price"><del>@Model.Oldcash</del></p>
+                            <div class="tag sale-tag">@Model.Dealpercent%</div>
+                        </div>
+                        <div class="view-more">
+                            <a href="#">Hoàn tiền 15% tối đa 500k/tháng <i class="far fa-question-circle"></i> </a>
+                            <a href="#">Miễn phí vận chuyển <i class="far fa-question-circle"></i></a>
+                        </div>
+                    </div>
+                    <div class="ver">
+                        <p><span style="color: #8e8e8e;">Phiên bản: </span><strong>Bản thường (Bìa mền + Bookmark)</strong></p>
+                        <span class="btn active">Bản thường (Bìa mềm)</span>
+                        <span class="btn">Bản đặc biệt (Bìa cứng + Bookmark)</span>
+                    </div>
+                    <div class="num-prod">
+                        <p>Số lượng:</p>
+                        <div class="buttons_added">
+                            <input class="minus is-form" type="button" value="-">
+                            <input aria-label="quantity" class="quantity-item" max="20" min="1" name="" type="number" value="1">
+                            <input class="plus is-form" type="button" value="+">
+                        </div>
+                        <p>1000+ sản phẩm có sẵn</p>
+                    </div>
+                </div>
+
+                <div class="info-footer">
+                    <div class="row">
+                        <div class="col l-6 m-6 c-12">
+                            <div class="cart btn">
+                                <i class="fas fa-shopping-cart"></i>
+                                <p>Thêm vào giỏ hàng</p>
+                            </div>
+                        </div>
+
+                        <div class="col l-6 m-6 c-12">
+                            <p class="buy btn">Mua ngay</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- PRODUCT INFO DETAIL -->
+        <div class="row">
+            <div class="col l-12 m-12 c-12">
+                <!-- CODE HERE -->
+                <div class="detail-content">
+                    <div class="detail-prod">
+                        <h2 class="title-prod">Chi tiết sản phẩm</h2>
+                        <table>
+                            <tr>
+                                <td>Công ty phát hành</td>
+                                <td>@Model.Company</td>
+                            </tr>
+                            <tr>
+                                <td>Ngày xuất bản</td>
+                                <td>@Model.PublishDate</td>
+                            </tr>
+                            <tr>
+                                <td>Kích thước</td>
+                                <td>@Model.Size</td>
+                            </tr>
+                            <tr>
+                                <td>Loại bìa</td>
+                                <td>@Model.LoaiBia</td>
+                            </tr>
+                            <tr>
+                                <td>Nhà xuất bản</td>
+                                <td>@Model.NhaXuatBan</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="desc-prod">
+                        <h2 class="title-prod">Mô tả sản phẩm</h2>
+                        <p>
+                            <strong>@Model.NameBook</strong><br>
+                            @Model.Desbook;
+                            <br>
+                            Giá sản phẩm trên GoBook đã bao gồm thuế theo luật hiện hành. Bên cạnh đó, tuỳ vào loại sản phẩm, hình thức và địa chỉ giao hàng mà có thể phát sinh thêm chi phí khác như phí vận chuyển,
+                            phụ phí hàng cồng kềnh, thuế nhập khẩu (đối với đơn hàng giao từ nước ngoài có giá trị trên 1 triệu đồng).....
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<!-- RECOMMEND -->
+<div id="recommend">
+
+    <div class="container">
+        <section id="newest">
+
+            <div class="container">
+                <div class="sub-info" style="text-align: left;">
+                    <p class="sub-title">Sản phẩm tương tự</p>
+                    <!-- <p class="sub-text">Lorem ipsum dolor sit amet !</p> -->
+                </div>
+            </div>
+
+            <div class="container newest slider newest-slider">
+                
+                @{
+                    foreach(var item in books)
+                    {
+                        <div class="book">
+                            <a asp-action="ProductDetail" asp-controller="Product" asp-route-id="@item.IdBook" asp-route-cate="@item.IdCate">
+                                <div class="book-top">
+                                    <img src="@item.Imageurl" class="book-img">
+                                    @* <img src="../../img/source/freeship.png" alt="" class="freeship-tag">*@
+                                </div>
+                                <div class="book-bottom">
+                                    <p class="book-title">@item.NameBook</p>
+                                    <div class="book-reviews">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <div class="book-info">
+                                        <p class="book-price">@item.Newcash</p>
+                                        @{
+                                            if (item.Dealpercent < 100000)
+                                            {
+                                               // var percent = item.Dealpercent.ToString(@"##\.");
+                                            }
+                                        }
+                                        <div class="tag sale-tag">@item.Dealpercent%</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                }
+               @* <div class="book">
+                    <a href="../../pages/chi-tiet-san-pham/01-hai-mat-cua-gia-dinh.html">
+                        <div class="book-top">
+                            <img src="../../img/books/book-01-hai-mat-gia-dinh/book-01-1.png" class="book-img">
+                            <img src="../../img/source/freeship.png" alt="" class="freeship-tag">
+                        </div>
+                        <div class="book-bottom">
+                            <p class="book-title">Hai mặt của gia đình</p>
+                            <div class="book-reviews">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <div class="book-info">
+                                <p class="book-price">70.800đ</p>
+                                <div class="tag sale-tag">-28%</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="book">
+                    <a href="../../pages/chi-tiet-san-pham/02-goc-khuat-cua-yeu-thuong.html">
+                        <div class="book-top">
+                            <img src="../../img/books/book-02-goc-khuat-cua-yeu-thuong/book-02-1.jpg" class="book-img">
+                        </div>
+                        <div class="book-bottom">
+                            <p class="book-title">Góc khuất của yêu thương</p>
+                            <div class="book-reviews">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="book-info">
+                                <p class="book-price">66,600đ</p>
+                                <div class="tag sale-tag">-32%</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="book">
+                    <a href="../../pages/chi-tiet-san-pham/03-chu-nghia-toi-gian.html">
+                        <div class="book-top">
+                            <img src="../../img/books/book-03-chu-nghi-toi-gian/book-03-1.jpg" class="book-img">
+                            <img src="../../img/source/freeship.png" alt="" class="freeship-tag">
+                        </div>
+                        <div class="book-bottom">
+                            <p class="book-title">Chủ nghĩa tối giản</p>
+                            <div class="book-reviews">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <div class="book-info">
+                                <p class="book-price">99.200đ</p>
+                                <div class="tag sale-tag">-29%</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="book">
+                    <a href="../../pages/chi-tiet-san-pham/04-chi-so-vuot-kho.html">
+                        <div class="book-top">
+                            <img src="../../img/books/book-04-chi-so-vuot-kho/book-04-1.jpg" class="book-img">
+                        </div>
+                        <div class="book-bottom">
+                            <p class="book-title">AQ Chỉ số vượt khó</p>
+                            <div class="book-reviews">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="book-info">
+                                <p class="book-price">90.000đ</p>
+                                <div class="tag sale-tag">-10%</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="book">
+                    <a href="../../pages/chi-tiet-san-pham/05-ga-nghien-giay.html">
+                        <div class="book-top">
+                            <img src="../../img/books/book-05-ga-nghien-giay/book-05-1.jpg" class="book-img">
+                            <img src="../../img/source/freeship.png" alt="" class="freeship-tag">
+                        </div>
+                        <div class="book-bottom">
+                            <p class="book-title">Gã nghiện giày</p>
+                            <div class="book-reviews">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <div class="book-info">
+                                <p class="book-price">119.600đ</p>
+                                <div class="tag sale-tag">-25%</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="book">
+                    <a href="../../pages/chi-tiet-san-pham/06-cang-ky-luat-cang-tu-do.html">
+                        <div class="book-top">
+                            <img src="../../img/books/book-06-cang-ky-luat-cang-tu-do/book-06-1.jpg" class="book-img">
+                        </div>
+                        <div class="book-bottom">
+                            <p class="book-title">Càng kỹ luật càng tự do</p>
+                            <div class="book-reviews">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="book-info">
+                                <p class="book-price">74.200đ</p>
+                                <div class="tag sale-tag">-32%</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="book">
+                    <a href="../../pages/chi-tiet-san-pham/07-wabi-sabi.html">
+                        <div class="book-top">
+                            <img src="../../img/books/book-07-wabi-sabi/book-07-1.jpg" class="book-img">
+                            <img src="../../img/source/freeship.png" alt="" class="freeship-tag">
+                        </div>
+                        <div class="book-bottom">
+                            <p class="book-title">Wabi Sabi</p>
+                            <div class="book-reviews">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <div class="book-info">
+                                <p class="book-price">79.200đ</p>
+                                <div class="tag sale-tag">-20%</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="book">
+                    <a href="../../pages/chi-tiet-san-pham/08-mat-phai.html">
+                        <div class="book-top">
+                            <img src="../../img/books/book-08-mat-phai/book-08-1.jpg" class="book-img">
+                        </div>
+                        <div class="book-bottom">
+                            <p class="book-title">Mặt phải</p>
+                            <div class="book-reviews">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="book-info">
+                                <p class="book-price">115.000đ</p>
+                                <!-- <div class="tag sale-tag">-10%</div> -->
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="book">
+                    <a href="../../pages/chi-tiet-san-pham/09-tat-ca-deu-la-chuyen-nho.html">
+                        <div class="book-top">
+                            <img src="../../img/books/book-09-tat-ca-deu-la-chuyen-nho/book-09-1.jpg" class="book-img">
+                            <img src="../../img/source/freeship.png" alt="" class="freeship-tag">
+                        </div>
+                        <div class="book-bottom">
+                            <p class="book-title">Tất cả đều là chuyện nhỏ</p>
+                            <div class="book-reviews">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <div class="book-info">
+                                <p class="book-price">54.000đ</p>
+                                <div class="tag sale-tag">-10%</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="book">
+                    <a href="../../pages/chi-tiet-san-pham/10-minh-la-ca.html">
+                        <div class="book-top">
+                            <img src="../../img/books/book-10-minh-la-ca/book-10-1.jpg" class="book-img">
+                        </div>
+                        <div class="book-bottom">
+                            <p class="book-title">Mình là cá, việc của mình là bơi</p>
+                            <div class="book-reviews">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="book-info">
+                                <p class="book-price">67.800đ</p>
+                                <div class="tag sale-tag">-24%</div>
+                            </div>
+                        </div>
+                    </a>
+                </div> *@
+
+            </div>
+
+        </section>
+    </div>
+
+</div>
+
+<!-- COMMENTS -->
+<section id="comments" class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col l-12 m-12 c-12">
+                <!-- CODE HERE -->
+
+                <div class="comments-container"></div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="section" id="newsletter">
+    <div class="container newsletter">
+        <div class="info reveal">
+            <p class="subtitle">Newsletter</p>
+            <h1 class="title">Đăng Ký Nhận Tin</h1>
+            <p class="text">Đăng ký email ngay hôm nay để nhận ngay những thông tin giảm giá, khuyến mãi mới nhất</p>
+        </div>
+        <div class="newsletter-form reveal">
+            <i class="fas fa-envelope newsletter-icon"></i>
+            <input type="text" class="newsletter-input" placeholder="Shio@gamil.com">
+            <a href="" class="btn newsletter-btn">Đăng Ký</a>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="l-footer">
+
+    <div class="container l-grid footer section reveal">
+
+        <div class="footer-content">
+            <a href="" class="footer-logo">
+                <img src="~/IMG/source/logo.png" alt="">
+            </a>
+            <p class="footer-text">Kết nối tri thức & trái tim</p>
+            <div class="footer-social">
+                <i class="fab fa-youtube"></i>
+                <i class="fab fa-facebook-f"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-twitter"></i>
+            </div>
+        </div>
+
+        <div class="footer-content">
+            <p class="footer-title">GIỚI THIỆU</p>
+            <ul class="footer-menu">
+                <a href="./index.html" class="footer-link">Trang chủ</a>
+                <a href="./pages/san-pham.html" class="footer-link">Sản phẩm</a>
+                <a href="./pages/tin-tuc.html" class="footer-link">Tin tức</a>
+                <a href="./pages/lien-he.html" class="footer-link">Liên hệ</a>
+            </ul>
+        </div>
+
+        <div class="footer-content">
+            <p class="footer-title">CHÍNH SÁCH CÔNG TY</p>
+            <ul class="footer-menu">
+                <a href="" class="footer-link">Chính sách giao nhận</a>
+                <a href="" class="footer-link">Chính sách đổi trả</a>
+                <a href="" class="footer-link">Phương thức thanh toán</a>
+                <a href="" class="footer-link">Chế độ bảo hành</a>
+            </ul>
+        </div>
+
+        <div class="footer-content">
+            <p class="footer-title">HỖ TRỢ KHÁCH HÀNG</p>
+            <ul class="footer-menu">
+                <a href="" class="footer-link">Hotline: (+84 28) 38 632 052</a>
+                <a href="" class="footer-link">Gửi yêu cầu đổi hàng</a>
+                <a href="" class="footer-link">P. Kinh doanh: sales@gobook.com.vn</a>
+                <a href="" class="footer-link">P. Hỗ trợ khách hàng: support@gobook.com.vn</a>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <div class="container footer-copyright">
+            <p>All rights reserved by &copy; GOBOOK creative 2021</p>
+        </div>
+    </div>
+
+</footer>
+
+<a href="#top" class="scroll-top">
+    <i class="fas fa-arrow-up"></i>
+</a>
+
+<!-- JQUERY  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- SLICK JS -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<!-- COMMENTS -->
+<script src="~/js/comments/js/jquery-comments.js"></script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery.textcomplete/1.8.0/jquery.textcomplete.js"></script>
+<script src="~/js/comments/data/comments-data.js"></script>
+
+<script src="~/js/app.js"></script>
+<script src="~/js/comments.js"></script>
+<script src="~/js/slider.js"></script>
+
