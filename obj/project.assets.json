@@ -11120,11 +11120,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\hoanggia\\Desktop\\TaiLieuHTML-CSS\\DoAnWebNangCao\\BookStoreWeb\\BookStoreWeb.csproj",
+      "projectUniqueName": "C:\\Users\\hoanggia\\Desktop\\TaiLieuHTML-CSS\\DoAnWebNangCao\\BookStoreWeb - Copy\\BookStoreWeb.csproj",
       "projectName": "BookStoreWeb",
-      "projectPath": "C:\\Users\\hoanggia\\Desktop\\TaiLieuHTML-CSS\\DoAnWebNangCao\\BookStoreWeb\\BookStoreWeb.csproj",
+      "projectPath": "C:\\Users\\hoanggia\\Desktop\\TaiLieuHTML-CSS\\DoAnWebNangCao\\BookStoreWeb - Copy\\BookStoreWeb.csproj",
       "packagesPath": "C:\\Users\\hoanggia\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\hoanggia\\Desktop\\TaiLieuHTML-CSS\\DoAnWebNangCao\\BookStoreWeb\\obj\\",
+      "outputPath": "C:\\Users\\hoanggia\\Desktop\\TaiLieuHTML-CSS\\DoAnWebNangCao\\BookStoreWeb - Copy\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

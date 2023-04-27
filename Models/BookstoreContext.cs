@@ -15,6 +15,8 @@ public partial class BookstoreContext : DbContext
     {
     }
 
+    public virtual DbSet<Account> Accounts { get; set; }
+
     public virtual DbSet<Author> Authors { get; set; }
 
     public virtual DbSet<Book> Books { get; set; }
@@ -25,19 +27,41 @@ public partial class BookstoreContext : DbContext
 
     public virtual DbSet<Customer> Customers { get; set; }
 
+    public virtual DbSet<News> News { get; set; }
+
     public virtual DbSet<OrderHistory> OrderHistories { get; set; }
 
     public virtual DbSet<OrderLine> OrderLines { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=localhost;Database=bookstore;Trusted_Connection=True;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer("Server=.;Database=bookstore;Trusted_Connection=true;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Account>(entity =>
+        {
+            entity.HasKey(e => e.AccountId).HasName("PK__Account__349DA5A65854A990");
+
+            entity.ToTable("Account");
+
+            entity.Property(e => e.AccountId)
+                .HasMaxLength(36)
+                .IsUnicode(false);
+            entity.Property(e => e.Email)
+                .HasMaxLength(128)
+                .IsUnicode(false);
+            entity.Property(e => e.Password)
+                .HasMaxLength(256)
+                .IsUnicode(false);
+            entity.Property(e => e.Username)
+                .HasMaxLength(32)
+                .IsUnicode(false);
+        });
+
         modelBuilder.Entity<Author>(entity =>
         {
-            entity.HasKey(e => e.IdAuthor).HasName("PK__author__7411B254C9187666");
+            entity.HasKey(e => e.IdAuthor).HasName("PK__author__7411B2546D734381");
 
             entity.ToTable("author");
 
@@ -51,7 +75,7 @@ public partial class BookstoreContext : DbContext
 
         modelBuilder.Entity<Book>(entity =>
         {
-            entity.HasKey(e => e.IdBook).HasName("PK__book__DAE712E80DAA242C");
+            entity.HasKey(e => e.IdBook).HasName("PK__book__DAE712E853DA0484");
 
             entity.ToTable("book");
 
@@ -102,7 +126,7 @@ public partial class BookstoreContext : DbContext
 
         modelBuilder.Entity<Category>(entity =>
         {
-            entity.HasKey(e => e.IdCategory).HasName("PK__category__E548B6733AA8D5A4");
+            entity.HasKey(e => e.IdCategory).HasName("PK__category__E548B673975A9226");
 
             entity.ToTable("category");
 
@@ -120,7 +144,7 @@ public partial class BookstoreContext : DbContext
 
         modelBuilder.Entity<CustOrder>(entity =>
         {
-            entity.HasKey(e => e.OrderId).HasName("PK__cust_ord__46596229ECBB9C5B");
+            entity.HasKey(e => e.OrderId).HasName("PK__cust_ord__46596229583EA42E");
 
             entity.ToTable("cust_order");
 
@@ -143,7 +167,7 @@ public partial class BookstoreContext : DbContext
 
         modelBuilder.Entity<Customer>(entity =>
         {
-            entity.HasKey(e => e.CustomerId).HasName("PK__customer__CD65CB85551BB5D3");
+            entity.HasKey(e => e.CustomerId).HasName("PK__customer__CD65CB85FECD6133");
 
             entity.ToTable("customer");
 
@@ -165,9 +189,39 @@ public partial class BookstoreContext : DbContext
             entity.Property(e => e.Phone).HasColumnName("phone");
         });
 
+        modelBuilder.Entity<News>(entity =>
+        {
+            entity.HasKey(e => e.IdNews).HasName("PK__news__389F1DA954C68361");
+
+            entity.ToTable("news");
+
+            entity.Property(e => e.IdNews)
+                .HasMaxLength(30)
+                .IsUnicode(false)
+                .HasColumnName("id_news");
+            entity.Property(e => e.AuthorId).HasColumnName("author_id");
+            entity.Property(e => e.NewsContent).HasColumnName("news_content");
+            entity.Property(e => e.NewsTag)
+                .HasMaxLength(30)
+                .IsUnicode(false)
+                .HasColumnName("news_tag");
+            entity.Property(e => e.NewsTitle)
+                .HasMaxLength(30)
+                .HasColumnName("news_title");
+            entity.Property(e => e.SummaryContent).HasColumnName("summary_content");
+
+            entity.HasOne(d => d.Author).WithMany(p => p.News)
+                .HasForeignKey(d => d.AuthorId)
+                .HasConstraintName("fk_author_ID");
+
+            entity.HasOne(d => d.NewsTagNavigation).WithMany(p => p.News)
+                .HasForeignKey(d => d.NewsTag)
+                .HasConstraintName("fk_tag_news");
+        });
+
         modelBuilder.Entity<OrderHistory>(entity =>
         {
-            entity.HasKey(e => e.HistoryId).HasName("PK__order_hi__096AA2E9B663DA3E");
+            entity.HasKey(e => e.HistoryId).HasName("PK__order_hi__096AA2E97BBCBB6F");
 
             entity.ToTable("order_history");
 
@@ -187,7 +241,7 @@ public partial class BookstoreContext : DbContext
 
         modelBuilder.Entity<OrderLine>(entity =>
         {
-            entity.HasKey(e => e.LineId).HasName("PK__order_li__F5AE5F622D8C543A");
+            entity.HasKey(e => e.LineId).HasName("PK__order_li__F5AE5F62EDD21F0C");
 
             entity.ToTable("order_line");
 

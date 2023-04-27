@@ -10,4 +10,6 @@ public partial class Author
     public string? NameAuthor { get; set; }
 
     public virtual ICollection<Book> Books { get; } = new List<Book>();
+
+    public virtual ICollection<News> News { get; } = new List<News>();
 }

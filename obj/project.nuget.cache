@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RNkOQO+2lGbUBBTBK5PpJIpHKrn6vIGezHwpzobq8mjgpumGAzg2+sMCmRMVlnzFUHnEX61jQsOr0ZgszeBgaA==",
+  "dgSpecHash": "J3PfvTitvlaf64eFCuYgZp4YwldUhUJpZxcwraAjYSrgxq0djHpRq/aruxGy6AM1xLlymg30HGsAUxWhtDmuPQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\hoanggia\\Desktop\\TaiLieuHTML-CSS\\DoAnWebNangCao\\BookStoreWeb\\BookStoreWeb.csproj",
+  "projectFilePath": "C:\\Users\\hoanggia\\Desktop\\TaiLieuHTML-CSS\\DoAnWebNangCao\\BookStoreWeb - Copy\\BookStoreWeb.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\hoanggia\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\hoanggia\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

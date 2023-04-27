@@ -9,11 +9,11 @@ public partial class Book
 
     public string? NameBook { get; set; }
 
-    public int? Newcash { get; set; }
+    public string? Newcash { get; set; }
 
     public string? Author { get; set; }
 
-    public int? Oldcash { get; set; }
+    public string? Oldcash { get; set; }
 
     public double? Dealpercent { get; set; }
 
@@ -44,17 +44,31 @@ public partial class Book
         BookstoreContext db = new BookstoreContext();
         var query = db.Books.ToList();
         List<Book> result = new List<Book>();
-        foreach(Book item in query)
+        foreach (Book item in query)
         {
-            if(item.IdBook != id)
+            if (item.IdBook != id)
                 result.Add(item);
         }
         return result;
     }
+
     public List<Book> GetAllBooks()
     {
         BookstoreContext db = new BookstoreContext();
         var query = db.Books.ToList();
         return query;
+    }
+
+    public List<Book> GetBookByCate(string cate)
+    {
+        BookstoreContext db = new BookstoreContext();
+        var query = db.Books.ToList();
+        List<Book> result = new List<Book>();
+        foreach (Book item in query)
+        {
+            if (item.IdCate == cate)
+                result.Add(item);
+        }
+        return result;
     }
 }

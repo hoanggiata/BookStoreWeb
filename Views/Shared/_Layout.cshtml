@@ -3,8 +3,6 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"]</title>
-    <link rel="stylesheet" href="~/BookStoreWeb.styles.css" asp-append-version="true" />
     <link href="@Url.Content("~/css/base.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/css/homepage.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/css/contact.css")" rel="stylesheet" type="text/css" />
@@ -16,8 +14,8 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 </head>
 <body>
-     <div id="top"></div>
-     <header id="header" class="l-header">
+    <!--Header-->
+    <header id="header" class="l-header">
 
         <div class="header-top">
             <div class="container header-content">
@@ -69,7 +67,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="@Url.Action("Index","News")" class="nav-link">
                             <i class="fas fa-newspaper"></i> Bài
                             viết
                         </a>
@@ -92,12 +90,19 @@
 
     </header>
 
+    <!--Body-->
     <div class="container-fluid">
         <main role="main" class="pb-3">
             @RenderBody();
         </main>
     </div>
-    
+    <div class="content-warpper">
+        <partial name="_NewsLetter"></partial>
+    </div>
+    <!--Footer-->
+    <div class="content-wrapper">
+        @Html.Partial("_Footer")
+    </div>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

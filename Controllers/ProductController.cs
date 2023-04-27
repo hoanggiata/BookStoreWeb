@@ -15,25 +15,8 @@ namespace BookStoreWeb.Controllers
             this.webHostEnvironment = webHostEnvironment;
         }
 
-        public List<Book> GetBookByCate(string cate)
-        {
-            BookstoreContext db = new BookstoreContext();
-            var query = db.Books.ToList();
-            List<Book> result = new List<Book>();
-            foreach (Book item in query)
-            {
-                if (item.IdCate == cate)
-                    result.Add(item);
-            }
-            return result;
-        }
-        public List<Category> GetCate()
-        {
-            BookstoreContext db = new BookstoreContext();
-          
-            List<Category> categories = db.Categories.ToList();
-            return categories;
-        }
+        
+     
         [HttpGet]
       /*  public IActionResult Index(int? page,string cate = "TL")
         {
@@ -60,11 +43,13 @@ namespace BookStoreWeb.Controllers
             dynamic myModel = new ExpandoObject();
             // myModel.Books = GetBookByCate(cate);
             Pagination pagination = new Pagination();
+            Book books = new Book();
+            Category cateModel = new Category();
             ViewBag.totalPage = pagination.getTotalPage(cate);
-            ViewBag.OnePageOfProducts = GetBookByCate(cate).ToPagedList(page, 8);
+            ViewBag.OnePageOfProducts = books.GetBookByCate(cate).ToPagedList(page, 8);
             ViewBag.CurrentPage = page;
-            ViewBag.RecommendBooks = GetBookByCate(cate);
-            myModel.Cate = GetCate();
+            ViewBag.RecommendBooks = books.GetBookByCate(cate);
+            myModel.Cate = cateModel.GetCate();
             foreach (Category item in myModel.Cate)
             {
                 if (item.IdCategory == cate)
@@ -80,10 +65,10 @@ namespace BookStoreWeb.Controllers
         public IActionResult ProductDetail(string id,string cate)
         {
              BookstoreContext db = new BookstoreContext();       
-             Book query = db.Books.Find(id);  
-            //Get image Cover
-            //string path = (string)"/IMG/books/" + cate.ToString() + "/" + id.ToString() + "/";
-            var provider = new PhysicalFileProvider(webHostEnvironment.WebRootPath);
+             Book query = db.Books.Find(id);
+        //Get image Cover
+        //string path = (string)"/IMG/books/" + cate.ToString() + "/" + id.ToString() + "/";
+        var provider = new PhysicalFileProvider(webHostEnvironment.WebRootPath);
             var content = provider.GetDirectoryContents(Path.Combine("IMG","books",cate,id));
             var objFiles = content.OrderBy(m => m.LastModified);
             List<string> Images = new List<string>();

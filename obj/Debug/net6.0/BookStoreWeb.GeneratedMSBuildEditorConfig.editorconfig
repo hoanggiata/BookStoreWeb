@@ -9,61 +9,77 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = BookStoreWeb
 build_property.RootNamespace = BookStoreWeb
-build_property.ProjectDir = C:\Users\hoanggia\Desktop\TaiLieuHTML-CSS\DoAnWebNangCao\BookStoreWeb\
+build_property.ProjectDir = C:\Users\hoanggia\Desktop\TaiLieuHTML-CSS\DoAnWebNangCao\BookStoreWeb - Copy\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\hoanggia\Desktop\TaiLieuHTML-CSS\DoAnWebNangCao\BookStoreWeb
+build_property.MSBuildProjectDirectory = C:\Users\hoanggia\Desktop\TaiLieuHTML-CSS\DoAnWebNangCao\BookStoreWeb - Copy
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/hoanggia/Desktop/TaiLieuHTML-CSS/DoAnWebNangCao/BookStoreWeb/Views/Home/Contact.cshtml]
+[C:/Users/hoanggia/Desktop/TaiLieuHTML-CSS/DoAnWebNangCao/BookStoreWeb - Copy/Views/Home/Contact.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDb250YWN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/hoanggia/Desktop/TaiLieuHTML-CSS/DoAnWebNangCao/BookStoreWeb/Views/Home/Index.cshtml]
+[C:/Users/hoanggia/Desktop/TaiLieuHTML-CSS/DoAnWebNangCao/BookStoreWeb - Copy/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/hoanggia/Desktop/TaiLieuHTML-CSS/DoAnWebNangCao/BookStoreWeb/Views/Home/News.cshtml]
+[C:/Users/hoanggia/Desktop/TaiLieuHTML-CSS/DoAnWebNangCao/BookStoreWeb - Copy/Views/Home/News.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxOZXdzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/hoanggia/Desktop/TaiLieuHTML-CSS/DoAnWebNangCao/BookStoreWeb/Views/Home/Privacy.cshtml]
+[C:/Users/hoanggia/Desktop/TaiLieuHTML-CSS/DoAnWebNangCao/BookStoreWeb - Copy/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/hoanggia/Desktop/TaiLieuHTML-CSS/DoAnWebNangCao/BookStoreWeb/Views/News/Index.cshtml]
+[C:/Users/hoanggia/Desktop/TaiLieuHTML-CSS/DoAnWebNangCao/BookStoreWeb - Copy/Views/LoginReg/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5SZWdcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hoanggia/Desktop/TaiLieuHTML-CSS/DoAnWebNangCao/BookStoreWeb - Copy/Views/LoginReg/Reg.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5SZWdcUmVnLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hoanggia/Desktop/TaiLieuHTML-CSS/DoAnWebNangCao/BookStoreWeb - Copy/Views/News/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmV3c1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/hoanggia/Desktop/TaiLieuHTML-CSS/DoAnWebNangCao/BookStoreWeb/Views/News/NewsDetail.cshtml]
+[C:/Users/hoanggia/Desktop/TaiLieuHTML-CSS/DoAnWebNangCao/BookStoreWeb - Copy/Views/News/NewsDetail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmV3c1xOZXdzRGV0YWlsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/hoanggia/Desktop/TaiLieuHTML-CSS/DoAnWebNangCao/BookStoreWeb/Views/Product/Index.cshtml]
+[C:/Users/hoanggia/Desktop/TaiLieuHTML-CSS/DoAnWebNangCao/BookStoreWeb - Copy/Views/Product/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/hoanggia/Desktop/TaiLieuHTML-CSS/DoAnWebNangCao/BookStoreWeb/Views/Product/ProductDetail.cshtml]
+[C:/Users/hoanggia/Desktop/TaiLieuHTML-CSS/DoAnWebNangCao/BookStoreWeb - Copy/Views/Product/ProductDetail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxQcm9kdWN0RGV0YWlsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/hoanggia/Desktop/TaiLieuHTML-CSS/DoAnWebNangCao/BookStoreWeb/Views/Shared/Error.cshtml]
+[C:/Users/hoanggia/Desktop/TaiLieuHTML-CSS/DoAnWebNangCao/BookStoreWeb - Copy/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/hoanggia/Desktop/TaiLieuHTML-CSS/DoAnWebNangCao/BookStoreWeb/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/hoanggia/Desktop/TaiLieuHTML-CSS/DoAnWebNangCao/BookStoreWeb - Copy/Views/Shared/_Footer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Gb290ZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hoanggia/Desktop/TaiLieuHTML-CSS/DoAnWebNangCao/BookStoreWeb - Copy/Views/Shared/_NewsLetter.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9OZXdzTGV0dGVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hoanggia/Desktop/TaiLieuHTML-CSS/DoAnWebNangCao/BookStoreWeb - Copy/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/hoanggia/Desktop/TaiLieuHTML-CSS/DoAnWebNangCao/BookStoreWeb/Views/_ViewImports.cshtml]
+[C:/Users/hoanggia/Desktop/TaiLieuHTML-CSS/DoAnWebNangCao/BookStoreWeb - Copy/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/hoanggia/Desktop/TaiLieuHTML-CSS/DoAnWebNangCao/BookStoreWeb/Views/_ViewStart.cshtml]
+[C:/Users/hoanggia/Desktop/TaiLieuHTML-CSS/DoAnWebNangCao/BookStoreWeb - Copy/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/hoanggia/Desktop/TaiLieuHTML-CSS/DoAnWebNangCao/BookStoreWeb/Views/Shared/_Layout.cshtml]
+[C:/Users/hoanggia/Desktop/TaiLieuHTML-CSS/DoAnWebNangCao/BookStoreWeb - Copy/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-mwz85tz9dn
