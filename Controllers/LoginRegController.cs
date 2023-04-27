@@ -36,7 +36,7 @@ namespace BookStoreWeb.Controllers
             }
             else
             {
-                ViewBag.Error = "<div class='error'>Sai tên tài khoản hoặc mật khẩu</div>";
+                //ViewBag.Error = "<div class='error'>Sai tên tài khoản hoặc mật khẩu</div>";
                 //ModelState.AddModelError("login", "Sai ten tai khoan hoac mat khau");
             }
             return View();
