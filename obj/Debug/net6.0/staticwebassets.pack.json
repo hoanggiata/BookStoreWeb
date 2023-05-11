@@ -293,6 +293,10 @@
       "PackagePath": "staticwebassets\\IMG\\books\\TL\\TL12\\book-12-4.png"
     },
     {
+      "Id": "C:\\Users\\hoanggia\\Desktop\\TaiLieuHTML-CSS\\DoAnWebNangCao\\BookStoreWeb - Copy\\wwwroot\\IMG\\source\\avatar\\User.jpg",
+      "PackagePath": "staticwebassets\\IMG\\source\\avatar\\User.jpg"
+    },
+    {
       "Id": "C:\\Users\\hoanggia\\Desktop\\TaiLieuHTML-CSS\\DoAnWebNangCao\\BookStoreWeb - Copy\\wwwroot\\IMG\\source\\avatar\\female.svg",
       "PackagePath": "staticwebassets\\IMG\\source\\avatar\\female.svg"
     },
@@ -307,6 +311,10 @@
     {
       "Id": "C:\\Users\\hoanggia\\Desktop\\TaiLieuHTML-CSS\\DoAnWebNangCao\\BookStoreWeb - Copy\\wwwroot\\IMG\\source\\avatar\\nghi.png",
       "PackagePath": "staticwebassets\\IMG\\source\\avatar\\nghi.png"
+    },
+    {
+      "Id": "C:\\Users\\hoanggia\\Desktop\\TaiLieuHTML-CSS\\DoAnWebNangCao\\BookStoreWeb - Copy\\wwwroot\\IMG\\source\\avatar\\smooth-sky-blue-color-paper-banner-background_8087-4420.jpg",
+      "PackagePath": "staticwebassets\\IMG\\source\\avatar\\smooth-sky-blue-color-paper-banner-background_8087-4420.jpg"
     },
     {
       "Id": "C:\\Users\\hoanggia\\Desktop\\TaiLieuHTML-CSS\\DoAnWebNangCao\\BookStoreWeb - Copy\\wwwroot\\IMG\\source\\avatar\\tung.jpg",
@@ -409,6 +417,10 @@
       "PackagePath": "staticwebassets\\Text\\DesBook.txt"
     },
     {
+      "Id": "C:\\Users\\hoanggia\\Desktop\\TaiLieuHTML-CSS\\DoAnWebNangCao\\BookStoreWeb - Copy\\wwwroot\\css\\Comment.css",
+      "PackagePath": "staticwebassets\\css\\Comment.css"
+    },
+    {
       "Id": "C:\\Users\\hoanggia\\Desktop\\TaiLieuHTML-CSS\\DoAnWebNangCao\\BookStoreWeb - Copy\\wwwroot\\css\\LoginReg.css",
       "PackagePath": "staticwebassets\\css\\LoginReg.css"
     },
@@ -447,6 +459,10 @@
     {
       "Id": "C:\\Users\\hoanggia\\Desktop\\TaiLieuHTML-CSS\\DoAnWebNangCao\\BookStoreWeb - Copy\\wwwroot\\css\\product-detail.css",
       "PackagePath": "staticwebassets\\css\\product-detail.css"
+    },
+    {
+      "Id": "C:\\Users\\hoanggia\\Desktop\\TaiLieuHTML-CSS\\DoAnWebNangCao\\BookStoreWeb - Copy\\wwwroot\\css\\profile.css",
+      "PackagePath": "staticwebassets\\css\\profile.css"
     },
     {
       "Id": "C:\\Users\\hoanggia\\Desktop\\TaiLieuHTML-CSS\\DoAnWebNangCao\\BookStoreWeb - Copy\\wwwroot\\css\\site.css",

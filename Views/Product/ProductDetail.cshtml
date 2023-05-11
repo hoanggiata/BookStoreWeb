@@ -1,4 +1,4 @@
-﻿@model BookStoreWeb.Models.Book
+﻿@model BookStoreWeb.Models.Book;
 
 @{
     ViewData["Title"] = "ProductDetail";
@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <!-- SLICK JS -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <link rel="stylesheet" type="text/css" href="/css/Comment.css"/>
     <!-- COMMENTS -->
     <link rel="stylesheet" href="~/js/comments/css/jquery-comments.css">
 
@@ -476,92 +477,33 @@
 </div>
 
 <!-- COMMENTS -->
-<section id="comments" class="section">
-    <div class="container">
-        <div class="row">
-            <div class="col l-12 m-12 c-12">
-                <!-- CODE HERE -->
-
-                <div class="comments-container"></div>
-
+<div class="comment-section">
+    <div class="post-comment">
+        @foreach (var item in ViewBag.Query)
+        {
+            <div class="list">
+                <div class="user">
+                    <div class="user-image"><img src="~/IMG/source/avatar/User.jpg" alt="Avatar" /></div>
+                    <div class="user-meta">
+                        <div class="user-name">@item.accName.Username</div>
+                        <div class="time-post">@item.cmt.CommentTime</div>
+                    </div>
+                </div>
+                <div class="comment-post">@item.cmt.CommentContent</div>
             </div>
-        </div>
+        }      
     </div>
-</section>
-
-<!-- NEWSLETTER -->
-<section class="section" id="newsletter">
-    <div class="container newsletter">
-        <div class="info reveal">
-            <p class="subtitle">Newsletter</p>
-            <h1 class="title">Đăng Ký Nhận Tin</h1>
-            <p class="text">Đăng ký email ngay hôm nay để nhận ngay những thông tin giảm giá, khuyến mãi mới nhất</p>
+    <div class="comment-box">
+        <div class="user">
+            <div class="user-image"><img src="~/IMG/source/avatar/User.jpg" alt="Avatar" /></div>
+            <div class="user-name">Add a comment</div>
         </div>
-        <div class="newsletter-form reveal">
-            <i class="fas fa-envelope newsletter-icon"></i>
-            <input type="text" class="newsletter-input" placeholder="Shio@gamil.com">
-            <a href="" class="btn newsletter-btn">Đăng Ký</a>
-        </div>
+        <form action="" method="post">
+            <textarea name="comment_content" placeholder="Write your thought about this book"></textarea>
+            <button class="comment_submit" type="submit">Submit</button>
+        </form>
     </div>
-</section>
-
-<!-- FOOTER -->
-<footer class="l-footer">
-
-    <div class="container l-grid footer section reveal">
-
-        <div class="footer-content">
-            <a href="" class="footer-logo">
-                <img src="~/IMG/source/logo.png" alt="">
-            </a>
-            <p class="footer-text">Kết nối tri thức & trái tim</p>
-            <div class="footer-social">
-                <i class="fab fa-youtube"></i>
-                <i class="fab fa-facebook-f"></i>
-                <i class="fab fa-instagram"></i>
-                <i class="fab fa-twitter"></i>
-            </div>
-        </div>
-
-        <div class="footer-content">
-            <p class="footer-title">GIỚI THIỆU</p>
-            <ul class="footer-menu">
-                <a href="./index.html" class="footer-link">Trang chủ</a>
-                <a href="./pages/san-pham.html" class="footer-link">Sản phẩm</a>
-                <a href="./pages/tin-tuc.html" class="footer-link">Tin tức</a>
-                <a href="./pages/lien-he.html" class="footer-link">Liên hệ</a>
-            </ul>
-        </div>
-
-        <div class="footer-content">
-            <p class="footer-title">CHÍNH SÁCH CÔNG TY</p>
-            <ul class="footer-menu">
-                <a href="" class="footer-link">Chính sách giao nhận</a>
-                <a href="" class="footer-link">Chính sách đổi trả</a>
-                <a href="" class="footer-link">Phương thức thanh toán</a>
-                <a href="" class="footer-link">Chế độ bảo hành</a>
-            </ul>
-        </div>
-
-        <div class="footer-content">
-            <p class="footer-title">HỖ TRỢ KHÁCH HÀNG</p>
-            <ul class="footer-menu">
-                <a href="" class="footer-link">Hotline: (+84 28) 38 632 052</a>
-                <a href="" class="footer-link">Gửi yêu cầu đổi hàng</a>
-                <a href="" class="footer-link">P. Kinh doanh: sales@gobook.com.vn</a>
-                <a href="" class="footer-link">P. Hỗ trợ khách hàng: support@gobook.com.vn</a>
-            </ul>
-        </div>
-
-    </div>
-
-    <div class="footer-bottom">
-        <div class="container footer-copyright">
-            <p>All rights reserved by &copy; GOBOOK creative 2021</p>
-        </div>
-    </div>
-
-</footer>
+</div>
 
 <a href="#top" class="scroll-top">
     <i class="fas fa-arrow-up"></i>

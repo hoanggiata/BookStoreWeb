@@ -35,6 +35,10 @@ public partial class Book
 
     public string? Desbook { get; set; }
 
+    public virtual ICollection<CartItem> CartItems { get; } = new List<CartItem>();
+
+    public virtual ICollection<Comment> Comments { get; } = new List<Comment>();
+
     public virtual Author? IdAuthorNavigation { get; set; }
 
     public virtual Category? IdCateNavigation { get; set; }

@@ -196,6 +196,9 @@ body {
     width: 100%;
     margin: 10px 0;
     position: relative;
+    flex-direction:row;
+    flex-wrap:wrap;
+    margin-top:1.6em;
 }
 
 .form-content .input-box input {

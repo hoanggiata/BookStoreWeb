@@ -1,6 +1,8 @@
 ﻿using System.Text;
 using System.Text;
 using System.Security.Cryptography;
+using System.Globalization;
+using System.Security.Claims;
 
 namespace BookStoreWeb.Models
 {
@@ -13,7 +15,7 @@ namespace BookStoreWeb.Models
 
             if (account.AccountId == null)
                 account.AccountId = Guid.NewGuid().ToString();
-            Utility utility = new Utility();
+
             account.Password = HashingPassword(account.Password); 
             db.Accounts.Add(account);
             db.SaveChanges();
@@ -31,5 +33,24 @@ namespace BookStoreWeb.Models
             return hash.ToString();
             //
         }
+
+        public static List<string>CountryList()
+        {
+            List<string> CultureList = new List<string>();
+            CultureInfo[] GetCultureInfos = CultureInfo.GetCultures(CultureTypes.SpecificCultures);
+
+            foreach (CultureInfo item in GetCultureInfos)
+            {
+                RegionInfo regionInfo = new RegionInfo(item.LCID);
+                if(!(CultureList.Contains(regionInfo.EnglishName)))
+                {
+                    CultureList.Add(regionInfo.EnglishName);
+                }
+            }
+            CultureList.Sort();
+            return CultureList;
+        }
+
+       
     }
 }

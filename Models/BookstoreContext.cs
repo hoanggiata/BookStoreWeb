@@ -21,36 +21,45 @@ public partial class BookstoreContext : DbContext
 
     public virtual DbSet<Book> Books { get; set; }
 
+    public virtual DbSet<CartItem> CartItems { get; set; }
+
     public virtual DbSet<Category> Categories { get; set; }
 
-    public virtual DbSet<CustOrder> CustOrders { get; set; }
-
-    public virtual DbSet<Customer> Customers { get; set; }
+    public virtual DbSet<Comment> Comments { get; set; }
 
     public virtual DbSet<News> News { get; set; }
 
-    public virtual DbSet<OrderHistory> OrderHistories { get; set; }
-
-    public virtual DbSet<OrderLine> OrderLines { get; set; }
+    public virtual DbSet<ShoppingCart> ShoppingCarts { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=.;Database=bookstore;Trusted_Connection=true;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer("Server=.\\;database=bookstore;Trusted_Connection=true;TrustServerCertificate=true");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Account>(entity =>
         {
-            entity.HasKey(e => e.AccountId).HasName("PK__Account__349DA5A65854A990");
+            entity.HasKey(e => e.AccountId).HasName("PK__Account__349DA5A6E5B4BFC3");
 
             entity.ToTable("Account");
 
             entity.Property(e => e.AccountId)
                 .HasMaxLength(36)
                 .IsUnicode(false);
+            entity.Property(e => e.AccountDes)
+                .HasMaxLength(100)
+                .HasColumnName("account_des");
+            entity.Property(e => e.Address).HasMaxLength(256);
+            entity.Property(e => e.Country).HasMaxLength(30);
             entity.Property(e => e.Email)
                 .HasMaxLength(128)
                 .IsUnicode(false);
+            entity.Property(e => e.FirstName)
+                .HasMaxLength(30)
+                .HasColumnName("first_name");
+            entity.Property(e => e.LastName)
+                .HasMaxLength(30)
+                .HasColumnName("last_name");
             entity.Property(e => e.Password)
                 .HasMaxLength(256)
                 .IsUnicode(false);
@@ -61,7 +70,7 @@ public partial class BookstoreContext : DbContext
 
         modelBuilder.Entity<Author>(entity =>
         {
-            entity.HasKey(e => e.IdAuthor).HasName("PK__author__7411B2546D734381");
+            entity.HasKey(e => e.IdAuthor).HasName("PK__author__7411B2546C1DCFA8");
 
             entity.ToTable("author");
 
@@ -75,7 +84,7 @@ public partial class BookstoreContext : DbContext
 
         modelBuilder.Entity<Book>(entity =>
         {
-            entity.HasKey(e => e.IdBook).HasName("PK__book__DAE712E853DA0484");
+            entity.HasKey(e => e.IdBook).HasName("PK__book__DAE712E87CE2EA46");
 
             entity.ToTable("book");
 
@@ -124,9 +133,35 @@ public partial class BookstoreContext : DbContext
                 .HasConstraintName("fk_book_category");
         });
 
+        modelBuilder.Entity<CartItem>(entity =>
+        {
+            entity.HasKey(e => e.IdCartItem).HasName("PK__CartItem__8E5A0FCE688E1CCC");
+
+            entity.ToTable("CartItem");
+
+            entity.Property(e => e.IdCartItem)
+                .ValueGeneratedNever()
+                .HasColumnName("id_CartItem");
+            entity.Property(e => e.IdProduct)
+                .HasMaxLength(30)
+                .HasColumnName("id_product");
+            entity.Property(e => e.IdShoppingCart).HasColumnName("id_shoppingCart");
+            entity.Property(e => e.QuantityItem).HasColumnName("quantity_item");
+
+            entity.HasOne(d => d.IdProductNavigation).WithMany(p => p.CartItems)
+                .HasForeignKey(d => d.IdProduct)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_product_id");
+
+            entity.HasOne(d => d.IdShoppingCartNavigation).WithMany(p => p.CartItems)
+                .HasForeignKey(d => d.IdShoppingCart)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_shoppingcart_id");
+        });
+
         modelBuilder.Entity<Category>(entity =>
         {
-            entity.HasKey(e => e.IdCategory).HasName("PK__category__E548B673975A9226");
+            entity.HasKey(e => e.IdCategory).HasName("PK__category__E548B6738B029E7C");
 
             entity.ToTable("category");
 
@@ -142,56 +177,42 @@ public partial class BookstoreContext : DbContext
                 .HasColumnName("name_category");
         });
 
-        modelBuilder.Entity<CustOrder>(entity =>
+        modelBuilder.Entity<Comment>(entity =>
         {
-            entity.HasKey(e => e.OrderId).HasName("PK__cust_ord__46596229583EA42E");
+            entity.HasKey(e => e.IdComment).HasName("PK__Comment__7E14AC85C79C1701");
 
-            entity.ToTable("cust_order");
+            entity.ToTable("Comment");
 
-            entity.Property(e => e.OrderId)
-                .ValueGeneratedNever()
-                .HasColumnName("order_id");
-            entity.Property(e => e.Andress)
-                .HasMaxLength(100)
+            entity.Property(e => e.IdComment)
+                .HasMaxLength(36)
                 .IsUnicode(false)
-                .HasColumnName("andress");
-            entity.Property(e => e.CustomerId).HasColumnName("customer_id");
-            entity.Property(e => e.OrderDate)
-                .HasColumnType("date")
-                .HasColumnName("order_date");
-
-            entity.HasOne(d => d.Customer).WithMany(p => p.CustOrders)
-                .HasForeignKey(d => d.CustomerId)
-                .HasConstraintName("fk_cust_order");
-        });
-
-        modelBuilder.Entity<Customer>(entity =>
-        {
-            entity.HasKey(e => e.CustomerId).HasName("PK__customer__CD65CB85FECD6133");
-
-            entity.ToTable("customer");
-
-            entity.Property(e => e.CustomerId)
-                .ValueGeneratedNever()
-                .HasColumnName("customer_id");
-            entity.Property(e => e.Andress)
-                .HasMaxLength(100)
+                .HasColumnName("id_comment");
+            entity.Property(e => e.CommentContent)
+                .HasColumnType("ntext")
+                .HasColumnName("comment_content");
+            entity.Property(e => e.CommentTime)
+                .HasColumnType("smalldatetime")
+                .HasColumnName("comment_time");
+            entity.Property(e => e.IdBook)
+                .HasMaxLength(30)
+                .HasColumnName("id_book");
+            entity.Property(e => e.IdUser)
+                .HasMaxLength(36)
                 .IsUnicode(false)
-                .HasColumnName("andress");
-            entity.Property(e => e.CustomerName)
-                .HasMaxLength(100)
-                .IsUnicode(false)
-                .HasColumnName("customer_name");
-            entity.Property(e => e.Email)
-                .HasMaxLength(100)
-                .IsUnicode(false)
-                .HasColumnName("email");
-            entity.Property(e => e.Phone).HasColumnName("phone");
+                .HasColumnName("id_user");
+
+            entity.HasOne(d => d.IdBookNavigation).WithMany(p => p.Comments)
+                .HasForeignKey(d => d.IdBook)
+                .HasConstraintName("fk_book_id");
+
+            entity.HasOne(d => d.IdUserNavigation).WithMany(p => p.Comments)
+                .HasForeignKey(d => d.IdUser)
+                .HasConstraintName("fk_user_id");
         });
 
         modelBuilder.Entity<News>(entity =>
         {
-            entity.HasKey(e => e.IdNews).HasName("PK__news__389F1DA954C68361");
+            entity.HasKey(e => e.IdNews).HasName("PK__news__389F1DA98B4F1674");
 
             entity.ToTable("news");
 
@@ -219,44 +240,27 @@ public partial class BookstoreContext : DbContext
                 .HasConstraintName("fk_tag_news");
         });
 
-        modelBuilder.Entity<OrderHistory>(entity =>
+        modelBuilder.Entity<ShoppingCart>(entity =>
         {
-            entity.HasKey(e => e.HistoryId).HasName("PK__order_hi__096AA2E97BBCBB6F");
+            entity.HasKey(e => e.IdCart).HasName("PK__Shopping__C71FE317B00A90AA");
 
-            entity.ToTable("order_history");
+            entity.ToTable("ShoppingCart");
 
-            entity.Property(e => e.HistoryId)
+            entity.Property(e => e.IdCart)
                 .ValueGeneratedNever()
-                .HasColumnName("history_id");
-            entity.Property(e => e.OrderId).HasColumnName("order_id");
-            entity.Property(e => e.OrderStatus).HasColumnName("order_status");
-            entity.Property(e => e.StatusDate)
-                .HasColumnType("date")
-                .HasColumnName("status_date");
+                .HasColumnName("id_cart");
+            entity.Property(e => e.CartTime)
+                .HasColumnType("smalldatetime")
+                .HasColumnName("cart_time");
+            entity.Property(e => e.IdUser)
+                .HasMaxLength(36)
+                .IsUnicode(false)
+                .HasColumnName("id_user");
 
-            entity.HasOne(d => d.Order).WithMany(p => p.OrderHistories)
-                .HasForeignKey(d => d.OrderId)
-                .HasConstraintName("fk_order_history");
-        });
-
-        modelBuilder.Entity<OrderLine>(entity =>
-        {
-            entity.HasKey(e => e.LineId).HasName("PK__order_li__F5AE5F62EDD21F0C");
-
-            entity.ToTable("order_line");
-
-            entity.Property(e => e.LineId)
-                .ValueGeneratedNever()
-                .HasColumnName("line_id");
-            entity.Property(e => e.BookId)
-                .HasMaxLength(30)
-                .HasColumnName("book_id");
-            entity.Property(e => e.OrderId).HasColumnName("order_id");
-            entity.Property(e => e.Price).HasColumnName("price");
-
-            entity.HasOne(d => d.Order).WithMany(p => p.OrderLines)
-                .HasForeignKey(d => d.OrderId)
-                .HasConstraintName("fk_line_order");
+            entity.HasOne(d => d.IdUserNavigation).WithMany(p => p.ShoppingCarts)
+                .HasForeignKey(d => d.IdUser)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_account_id");
         });
 
         OnModelCreatingPartial(modelBuilder);

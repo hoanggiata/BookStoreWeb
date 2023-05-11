@@ -1,4 +1,4 @@
-﻿
+﻿@model BookStoreWeb.Models.Reg
 @{
     Layout = null;
 }
@@ -40,15 +40,27 @@
                         <div class="input-boxes">
                             <div class="input-box">
                                 <i class="fas fa-user"></i>
-                                <input type="text" name="username" placeholder="Enter your username" required>
-                            </div>
+                                <input type="text" name="username" asp-for="UserName" placeholder="Enter your username" required>
+                                <span asp-validation-for="UserName" class="text-danger "></span>
+                                <br />
+                                <p class="text-danger ">@ViewBag.UserNameMessage</p>
+                            </div>                   
                             <div class="input-box">
-                                <i class="fas fa-envelope"></i>
-                                <input type="email" name="email" placeholder="Enter your email" required>
+                                <i class="fas fa-lock"></i>
+                                <input type="password" name="password" asp-for="Password" placeholder="Enter your password" required>
+                                <span asp-validation-for="Password" class="text-danger"></span>
                             </div>
                             <div class="input-box">
                                 <i class="fas fa-lock"></i>
-                                <input type="password" name="password" placeholder="Enter your password" required>
+                                <input type="password" asp-for="ConfirmPassword" placeholder="Confirm Password" required>
+                                <span asp-validation-for="ConfirmPassword" class="text-danger "></span>
+                            </div>
+                            <div class="input-box">
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" name="email" asp-for="Email" placeholder="Enter your email" required>
+                                <span asp-validation-for="Email" class="text-danger "></span>
+                                <br />
+                                <p class="text-danger">@ViewBag.EmailMessage</p>
                             </div>
                             <div class="button input-box">
                                 <input type="submit" value="Sumbit">

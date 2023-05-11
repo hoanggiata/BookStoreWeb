@@ -45,6 +45,8 @@
                         </div>
                     </div>
 
+                    
+
                 </div>
 
             </div>
@@ -52,7 +54,7 @@
 
         <nav class="nav container">
 
-            <a href="@Url.Action("Index","Home")" class="nav-logo">
+            <a href="@Url.Action("Index","Home")" class="nav-logo" style="max-width:40rem;">
                 <img src="~/IMG/source/logo.png" alt="">
             </a>
 
@@ -75,11 +77,17 @@
                     <li class="nav-item">
                         <a href="@Url.Action("Contact","Home")" class="nav-link"><i class="fas fa-phone-alt"></i> Liên hệ</a>
                     </li>
-
                 </ul>
-
             </div>
-
+          
+            <div class="dropdown nav-link">
+                <a class="user-profile">@User.Identity.Name</a>
+                <div class="dropdown-content">
+                    <a asp-controller="Profile" asp-action="Index">Profile</a>
+                    <a asp-controller="LoginReg" asp-action="Logout">LogOut</a>
+                    
+                </div>
+            </div>
 
             <div class="nav-toggle">
                 <i class="fas fa-bars"></i>

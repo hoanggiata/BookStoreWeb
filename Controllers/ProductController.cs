@@ -4,6 +4,7 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.AspNetCore.Hosting;
 using System.Dynamic;
 using PagedList;
+using System.Security.Claims;
 
 namespace BookStoreWeb.Controllers
 {
@@ -15,8 +16,12 @@ namespace BookStoreWeb.Controllers
             this.webHostEnvironment = webHostEnvironment;
         }
 
-        
-     
+        private string GetUserID()
+        {
+            var userId = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+            return userId;
+        }
+
         [HttpGet]
       /*  public IActionResult Index(int? page,string cate = "TL")
         {
@@ -61,14 +66,16 @@ namespace BookStoreWeb.Controllers
             ViewBag.ListCate = myModel.Cate;
             return View();
         }
-       
+        [HttpGet]
         public IActionResult ProductDetail(string id,string cate)
         {
-             BookstoreContext db = new BookstoreContext();       
-             Book query = db.Books.Find(id);
+            TempData["idBook"] = id;
+            TempData["Cate"] = cate;
+            BookstoreContext db = new BookstoreContext();       
+             Book result = db.Books.Find(id);
         //Get image Cover
         //string path = (string)"/IMG/books/" + cate.ToString() + "/" + id.ToString() + "/";
-        var provider = new PhysicalFileProvider(webHostEnvironment.WebRootPath);
+            var provider = new PhysicalFileProvider(webHostEnvironment.WebRootPath);
             var content = provider.GetDirectoryContents(Path.Combine("IMG","books",cate,id));
             var objFiles = content.OrderBy(m => m.LastModified);
             List<string> Images = new List<string>();
@@ -78,10 +85,31 @@ namespace BookStoreWeb.Controllers
             }
             ViewBag.images = Images; //Done
 
-            //Get other products except This Product
+            //Get all comment in this book page
+           // List<Comment> comments = Utility.listComment(id);
+           // List<Account> accounts = Account.GetAllUserCmt(comments);
 
-            return View(query); 
+            //query left join get all the comment from that id book and get user name from id
+            var query = from cmt in Comment.listComment(id)
+                        join user in db.Accounts
+                        on cmt.IdUser equals user.AccountId
+                        into AllCommentBook
+                        from accName in AllCommentBook.DefaultIfEmpty()
+
+                        select new { cmt, accName };
+            ViewBag.Query = query;
+            //end query
+
+            //Get User ID
+            //Account user = db.Accounts.Find(GetUserID());
+
+            return View(result); 
         }
-        
+        [HttpPost]
+        public IActionResult ProductDetail(string comment_content)
+        {
+            Comment.CreateComment(comment_content, GetUserID(), TempData["idBook"].ToString());
+            return RedirectToAction("ProductDetail", new { id=TempData["idBook"].ToString(), cate=TempData["Cate"].ToString()});
+        }
     }
 }

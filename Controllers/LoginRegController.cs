@@ -28,19 +28,27 @@ namespace BookStoreWeb.Controllers
                 var identity = new ClaimsIdentity(new[]
                 {
                     new Claim(ClaimTypes.Name,acc.Username),
-
-                },"login");
-                var principal = new ClaimsPrincipal(identity);
-                var login = HttpContext.SignInAsync(principal);
+                    new Claim(ClaimTypes.NameIdentifier,acc.AccountId.ToString()),
+                },"Login");
+                 var principal = new ClaimsPrincipal(identity);
+                 var login = HttpContext.SignInAsync(principal);
                 return Redirect("~/Home/Index");
             }
             else
             {
-                //ViewBag.Error = "<div class='error'>Sai tên tài khoản hoặc mật khẩu</div>";
+                ViewBag.Error = "<div class='error'>Sai tên tài khoản hoặc mật khẩu</div>";
                 //ModelState.AddModelError("login", "Sai ten tai khoan hoac mat khau");
             }
             return View();
         }
+
+        [HttpGet]
+        public IActionResult Logout()
+        {
+            HttpContext.SignOutAsync();
+            return Redirect("~/Home/Index");
+        }
+
 
         [HttpGet]
         public IActionResult Reg()
@@ -48,11 +56,30 @@ namespace BookStoreWeb.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Reg(string username,string password,string email)
+        public IActionResult Reg(Reg reg)
         {
-                Account acc = new Account(username, password, email);
-                Utility utility = new Utility();
-                utility.CreateUser(acc);
+
+            //  Account acc = new Account(obj.Username, obj.Password, obj.Email);
+            BookstoreContext db = new BookstoreContext();
+            bool CheckUserExsist = db.Accounts.Any(x => x.Username == reg.UserName);
+            if(CheckUserExsist)
+            {
+                ViewBag.UserNameMessage = "This User Name is already exsist";
+                return View();
+            }
+            bool CheckEmailExsist = db.Accounts.Any(x => x.Email== reg.Email);
+            if(CheckEmailExsist)
+            {
+                ViewBag.EmailMessage = "This Email is already in use, try another";
+                return View();
+            }
+            Account user = new Account();
+            user.Username = reg.UserName;
+            user.Password = reg.Password;
+            user.Email = reg.Email;
+            Utility utility = new Utility();
+            utility.CreateUser(user);
+
                 return RedirectToAction("Index");
         }
     }
