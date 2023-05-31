@@ -72,7 +72,7 @@ namespace BookStoreWeb.Controllers
         [HttpPost]
         public IActionResult RemoveItem(string id)
         {
-            string result = CartItem.RemoveItem(id);
+            string result = CartItem.RemoveItem(id,GetUserID());
             return Json(result);
         }
 

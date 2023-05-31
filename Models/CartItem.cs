@@ -59,10 +59,11 @@ public partial class CartItem
             db.SaveChanges();
         }
     }
-    public static string RemoveItem(string id_Item)
+    public static string RemoveItem(string id_Item,string id_user)
     {
         BookstoreContext db = new BookstoreContext();
-        var product = db.CartItems.FirstOrDefault(x => x.IdProduct == id_Item);
+        var shoppingCart = db.ShoppingCarts.FirstOrDefault(x => x.IdUser == x.IdUser && x.CartTime == null);
+        var product = db.CartItems.FirstOrDefault(x => x.IdProduct == id_Item && x.IdShoppingCart == shoppingCart.IdCart);
         if (product != null)
         {
             db.CartItems.Remove(product); db.SaveChanges();
