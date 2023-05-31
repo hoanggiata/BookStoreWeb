@@ -80,6 +80,16 @@
 .comment-box .comment_submit:hover{
     background: #0076bf;
 }
+.div-warning .login-warning {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    font-size: medium;
+    font-weight: bold;
+    text-decoration: none;
+    margin-top: 2em;
+}
 
 /*Responsive*/
 @media screen and (max-width:660px)

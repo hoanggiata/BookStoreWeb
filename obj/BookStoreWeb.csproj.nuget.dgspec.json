@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\hoanggia\\Desktop\\TaiLieuHTML-CSS\\DoAnWebNangCao\\BookStoreWeb - Copy\\BookStoreWeb.csproj": {}
+    "C:\\Users\\hoanggia\\Desktop\\TaiLieuHTML-CSS\\DoAnWebNangCao\\BookStoreWeb - Copy - Copy - Copy\\BookStoreWeb.csproj": {}
   },
   "projects": {
-    "C:\\Users\\hoanggia\\Desktop\\TaiLieuHTML-CSS\\DoAnWebNangCao\\BookStoreWeb - Copy\\BookStoreWeb.csproj": {
+    "C:\\Users\\hoanggia\\Desktop\\TaiLieuHTML-CSS\\DoAnWebNangCao\\BookStoreWeb - Copy - Copy - Copy\\BookStoreWeb.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hoanggia\\Desktop\\TaiLieuHTML-CSS\\DoAnWebNangCao\\BookStoreWeb - Copy\\BookStoreWeb.csproj",
+        "projectUniqueName": "C:\\Users\\hoanggia\\Desktop\\TaiLieuHTML-CSS\\DoAnWebNangCao\\BookStoreWeb - Copy - Copy - Copy\\BookStoreWeb.csproj",
         "projectName": "BookStoreWeb",
-        "projectPath": "C:\\Users\\hoanggia\\Desktop\\TaiLieuHTML-CSS\\DoAnWebNangCao\\BookStoreWeb - Copy\\BookStoreWeb.csproj",
+        "projectPath": "C:\\Users\\hoanggia\\Desktop\\TaiLieuHTML-CSS\\DoAnWebNangCao\\BookStoreWeb - Copy - Copy - Copy\\BookStoreWeb.csproj",
         "packagesPath": "C:\\Users\\hoanggia\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hoanggia\\Desktop\\TaiLieuHTML-CSS\\DoAnWebNangCao\\BookStoreWeb - Copy\\obj\\",
+        "outputPath": "C:\\Users\\hoanggia\\Desktop\\TaiLieuHTML-CSS\\DoAnWebNangCao\\BookStoreWeb - Copy - Copy - Copy\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -48,6 +48,10 @@
               "target": "Package",
               "version": "[6.4.4, )"
             },
+            "Microsoft.AspNet.WebPages.WebData": {
+              "target": "Package",
+              "version": "[3.2.9, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[7.0.4, )"
@@ -83,6 +87,10 @@
             "X.PagedList.Mvc.Core": {
               "target": "Package",
               "version": "[8.4.7, )"
+            },
+            "jQWidgets.AspNetCore.Mvc.TagHelpers": {
+              "target": "Package",
+              "version": "[2.0.1, )"
             }
           },
           "imports": [

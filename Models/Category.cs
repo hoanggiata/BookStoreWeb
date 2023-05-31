@@ -14,7 +14,6 @@ public partial class Category
     public virtual ICollection<Book> Books { get; } = new List<Book>();
 
     public virtual ICollection<News> News { get; } = new List<News>();
-
     public List<Category> GetCate()
     {
         BookstoreContext db = new BookstoreContext();
@@ -22,4 +21,5 @@ public partial class Category
         List<Category> categories = db.Categories.ToList();
         return categories;
     }
+
 }

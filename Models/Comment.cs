@@ -15,6 +15,8 @@ public partial class Comment
 
     public string? IdBook { get; set; }
 
+    public int? StarRating { get; set; }
+
     public virtual Book? IdBookNavigation { get; set; }
 
     public virtual Account? IdUserNavigation { get; set; }
@@ -26,7 +28,7 @@ public partial class Comment
         IdUser = idUser;
         IdBook = idBook;
     }
-
+    public Comment() { }
     public static List<Comment> listComment(string id_book)
     {
         BookstoreContext db = new BookstoreContext();
@@ -35,13 +37,13 @@ public partial class Comment
                              select item).ToList();
         return getAllComment;
     }
-    public static void CreateComment(string comment_content, string id_user, string id_book)
+    public static void CreateComment(string comment_content, string id_user, string id_book, int star)
     {
         BookstoreContext db = new BookstoreContext();
         string id_comment = Guid.NewGuid().ToString();
         Comment comment = new Comment(id_comment, comment_content, id_user, id_book);
+        comment.StarRating = star;
         db.Comments.Add(comment);
         db.SaveChanges();
     }
-
 }

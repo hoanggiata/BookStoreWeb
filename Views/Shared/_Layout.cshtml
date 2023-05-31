@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http.Extensions;
+@{
+    TempData["preUrl"] = Context.Request.GetDisplayUrl();
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -12,11 +16,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <!-- SLICK JS -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <title>@ViewData["Title"]</title>
 </head>
 <body>
     <!--Header-->
     <header id="header" class="l-header">
-
         <div class="header-top">
             <div class="container header-content">
 
@@ -54,7 +58,7 @@
 
         <nav class="nav container">
 
-            <a href="@Url.Action("Index","Home")" class="nav-logo" style="max-width:40rem;">
+            <a href="@Url.Action("Index","Home")" class="nav-logo" style="max-width:36.5rem;">
                 <img src="~/IMG/source/logo.png" alt="">
             </a>
 
@@ -77,18 +81,37 @@
                     <li class="nav-item">
                         <a href="@Url.Action("Contact","Home")" class="nav-link"><i class="fas fa-phone-alt"></i> Liên hệ</a>
                     </li>
+                    @{
+                        if(User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index","Cart")" class="nav-link"><i class="fas fa-shopping-cart"></i> Giỏ hàng</a>
+                            </li>
+                        }
+                    }                  
                 </ul>
             </div>
-          
-            <div class="dropdown nav-link">
-                <a class="user-profile">@User.Identity.Name</a>
-                <div class="dropdown-content">
-                    <a asp-controller="Profile" asp-action="Index">Profile</a>
-                    <a asp-controller="LoginReg" asp-action="Logout">LogOut</a>
-                    
-                </div>
-            </div>
+            @if(User.Identity.IsAuthenticated)
+            {
+                <div class="dropdown nav-link">
+                    <a class="user-profile">@User.Identity.Name</a>
+                    <div class="dropdown-content">
+                        <a asp-controller="Profile" asp-action="Index">Profile</a>
+                        <a asp-controller="LoginReg" asp-action="Logout">LogOut</a>
 
+                    </div>
+                </div>
+            }
+            @if(!User.Identity.IsAuthenticated)
+            {
+                <div class="dropdown nav-link" style="justify-content:space-between;">
+                    <a class="user-profile" style="color: rgb(128, 128, 128);" href="@Url.Action("Index","LoginReg")">Đăng Nhập</a>
+                    <div class="dropdown-content">
+                        <a asp-controller="LoginReg" asp-action="ForgotPassword">Quên Mật Khẩu</a>
+
+                    </div>
+                </div>
+            }
             <div class="nav-toggle">
                 <i class="fas fa-bars"></i>
             </div>

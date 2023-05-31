@@ -22,27 +22,15 @@ namespace BookStoreWeb.Controllers
             return userId;
         }
 
-        [HttpGet]
-      /*  public IActionResult Index(int? page,string cate = "TL")
+        public IOrderedEnumerable<IFileInfo> getImages(string cate, string id)
         {
-            dynamic myModel = new ExpandoObject();
-            // myModel.Books = GetBookByCate(cate);
-            List<Book> books = GetBookByCate(cate).ToList();
-            var pageNumbers = page ?? 1;
-            ViewBag.OnePageOfProducts = (IPagedList) books.ToPagedList(pageNumbers, 6);
-            myModel.Cate = GetCate();
-            foreach(Category item in myModel.Cate)
-            {
-                if (item.IdCategory == cate)
-                {
-                    item.CssClass = "active";
-                    ViewBag.GetCate = item.IdCategory;
-                }
-            }
-            ViewBag.ListCate = myModel.Cate;
-            return View();
-        } */
-     
+            var provider = new PhysicalFileProvider(webHostEnvironment.WebRootPath);
+            var content = provider.GetDirectoryContents(Path.Combine("IMG", "books", cate, id));
+            var objFiles = content.OrderBy(m => m.LastModified);
+            return objFiles;
+        }
+
+        [HttpGet]   
         public IActionResult Index(int page, string cate = "TL")
         {
             dynamic myModel = new ExpandoObject();
@@ -73,23 +61,15 @@ namespace BookStoreWeb.Controllers
             TempData["Cate"] = cate;
             BookstoreContext db = new BookstoreContext();       
              Book result = db.Books.Find(id);
-        //Get image Cover
-        //string path = (string)"/IMG/books/" + cate.ToString() + "/" + id.ToString() + "/";
-            var provider = new PhysicalFileProvider(webHostEnvironment.WebRootPath);
-            var content = provider.GetDirectoryContents(Path.Combine("IMG","books",cate,id));
-            var objFiles = content.OrderBy(m => m.LastModified);
+            //Get image Cover
+            //string path = (string)"/IMG/books/" + cate.ToString() + "/" + id.ToString() + "/";
+            var objFiles = getImages(cate,id);
             List<string> Images = new List<string>();
             foreach(var item in objFiles.ToList())
             {
                 Images.Add(item.Name);
             }
             ViewBag.images = Images; //Done
-
-            //Get all comment in this book page
-           // List<Comment> comments = Utility.listComment(id);
-           // List<Account> accounts = Account.GetAllUserCmt(comments);
-
-            //query left join get all the comment from that id book and get user name from id
             var query = from cmt in Comment.listComment(id)
                         join user in db.Accounts
                         on cmt.IdUser equals user.AccountId
@@ -97,19 +77,61 @@ namespace BookStoreWeb.Controllers
                         from accName in AllCommentBook.DefaultIfEmpty()
 
                         select new { cmt, accName };
+            int totalRating =0 ;
+            foreach(var item in query)
+            {
+                totalRating += Convert.ToInt32(item.cmt.StarRating);
+            }
+            if(query.Count()>0)
+            {
+                ViewBag.TotalRating = totalRating / query.Count();
+            }
+            else
+            {
+                ViewBag.TotalRating = 0;
+            }
+            ViewBag.SumRating = query.Count();
             ViewBag.Query = query;
-            //end query
-
-            //Get User ID
-            //Account user = db.Accounts.Find(GetUserID());
-
+            ViewBag.UserID = GetUserID();
             return View(result); 
         }
+          [HttpPost]
+          public IActionResult ProductDetail(string comment_content,int rating)
+          {
+              Comment.CreateComment(comment_content, GetUserID(), TempData["idBook"].ToString(),rating);
+              return RedirectToAction("ProductDetail", new { id=TempData["idBook"].ToString(), cate=TempData["Cate"].ToString()});
+          }
+        
         [HttpPost]
-        public IActionResult ProductDetail(string comment_content)
+        public IActionResult PostItem(string idBook,int quantity,string idUser, string PriceItem)
         {
-            Comment.CreateComment(comment_content, GetUserID(), TempData["idBook"].ToString());
-            return RedirectToAction("ProductDetail", new { id=TempData["idBook"].ToString(), cate=TempData["Cate"].ToString()});
+            CartItem.AddItemToCart(idBook, quantity, idUser,PriceItem);
+            return Json("Thanh Cong");
         }
+
+        /*   [HttpGet]
+           public IActionResult GetComment(string id)
+           {
+               //query left join get all the comment from that id book and get user name from id
+
+               BookstoreContext db = new BookstoreContext();
+               var query = from cmt in Comment.listComment(id)
+                           join user in db.Accounts
+                           on cmt.IdUser equals user.AccountId
+                           into AllCommentBook
+                           from accName in AllCommentBook.DefaultIfEmpty()
+
+                           select new { cmt, accName };
+               //end query
+               return Json(query);
+           }
+           [HttpPost]
+           public IActionResult PostComment(int rating, string comment_content,string IdBook)
+           {
+               Comment.CreateComment(comment_content, GetUserID(),IdBook, rating);
+               return Json("Thanh Cong");
+           } */
+
+
     }
 }

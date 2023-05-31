@@ -285,7 +285,7 @@ a {
   line-height: 5rem;
   width: 30%;
   height: 30%;
-  object-fit: contain;
+  background-size:cover;
 }
 
 .nav-toggle {
@@ -294,7 +294,6 @@ a {
   color: var(--blue-color);
   cursor: pointer;
 }
-
 .nav-link {
   font-size: var(--subtitle-size);
   font-weight: 500;
@@ -308,7 +307,7 @@ a {
 }
 
 .show-menu {
-  height: 21.2rem;
+  height: 26rem;
   padding: 1rem 0 2rem 0;
 }
 
@@ -606,7 +605,7 @@ a {
 
   .nav-link {
     position: relative;
-    margin-left: 2.5rem;
+    margin-left: 1.5rem;
   }
 
   .nav-link::after {

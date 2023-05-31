@@ -1,6 +1,7 @@
-﻿@model BookStoreWeb.Models.Reg
+﻿@model BookStoreWeb.Models.RegVM
 @{
     Layout = null;
+    ViewData["Title"] = "Registration";
 }
 <!DOCTYPE html>
 <!-- Coding by CodingLab | www.codinglabweb.com-->
@@ -65,7 +66,7 @@
                             <div class="button input-box">
                                 <input type="submit" value="Sumbit">
                             </div>
-                            <div class="text sign-up-text">Already have an account? <label for="flip">Login now</label></div>
+                            <div class="text sign-up-text">Already have an account? <a href="@Url.Action("Index","LoginReg")">Login now</a></div>
                         </div>
                     </form>
                 </div>

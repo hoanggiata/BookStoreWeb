@@ -47,5 +47,4 @@ public partial class Account
         }
         return listUserCMT;
     }
-
 }

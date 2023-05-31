@@ -1,27 +1,35 @@
-﻿@model BookStoreWeb.Models.Book;
+﻿@using Azure.Core;
+@model BookStoreWeb.Models.Book;
+@using Microsoft.AspNetCore.Http.Extensions;
+@using jQWidgets.AspNetCore.Mvc.TagHelpers;
 
 @{
     ViewData["Title"] = "ProductDetail";
     <link href="@Url.Content("~/css/base.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/css/grid.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/css/AddItemCart.css")" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="@Url.Content("~/css/partial/book.css")">
     <link rel="stylesheet" type="text/css" href="@Url.Content("~/css/product-detail.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/css/jqwidget/jqx.base.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/css/StarRating.css")">
     <!-- FONT AWESOME -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <!-- SLICK JS -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" type="text/css" href="/css/Comment.css"/>
     <!-- COMMENTS -->
-    <link rel="stylesheet" href="~/js/comments/css/jquery-comments.css">
+    <script type="text/javascript" src="~/js/jqwidget/jqxrating.js"></script>
+    <script type="text/javascript" src="~/js/jqwidget/jqxcore.js"></script>
+    <script type="text/javascript" src="~/js/jqwidget/jqxbuttons.js"></script>
+    <script type="text/javascript" src="~/js/jqwidget/jqxlistbox.js"></script>
+    <script type="text/javascript" src="~/js/jqwidget/jqxscrollbar.js"></script>
 
     List<Book> books = new List<Book>();
     Book temp = new Book();
     books = temp.GetBookExById(Model.IdBook);
-
     //string content = File.ReadAllText(@"C:\Users\hoanggia\Desktop\TaiLieuHTML-CSS\DoAnWebNangCao\BookStoreWeb\wwwroot\Text\DesBook.txt");
     
 }
-
 <div class="section top-part">
 
     <div class="container section">
@@ -32,14 +40,6 @@
             <div class="col l-5 m-5 c-12">
 
                 <div class="slider product-detail-slider-top single-product-slider">
-
-
-                    @* @foreach (var item in Model.imageBook)
-                    {
-                    <div class="single-product-img">
-                    <img src="@Url.Content(item)" alt="Image"/>
-                    </div>
-                    } *@
                     @{
                         foreach(var item in ViewBag.images)
                         {
@@ -55,22 +55,9 @@
                 </div>
 
                 <div class="slider product-detail-slider-bottom navs-product-slider">
-
-                    @* <div class="navs-product-img">
-                    <img src="../../img/books/book-01-hai-mat-gia-dinh/book-01-1.png">
-                    <div class="navs-product-img-bg"></div>
-                    </div>
-                    @foreach (var item in Model.imageBook)
-                    {
-                    <div class="navs-product-img">
-                    <img src="@Url.Content(item)" alt="Image"/>
-                    <div class="navs-product-img-bg"></div>
-                    </div>
-                    }    *@
                     @{
                         foreach (var item in ViewBag.images)
-                        {
-                            
+                        {                         
                             <div class="navs-product-img">
                                 @{
                                     var url = "/IMG/books/" + Model.IdCate.ToString() + "/" + Model.IdBook.ToString() + "/" + item;
@@ -92,20 +79,30 @@
                     <h2 class="book-name">@Model.NameBook</h2>
                     <div class="rate-star">
                         <div class="book-reviews" style="cursor: pointer;">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
+                                @{
+                                    for (int i = 1; i <=5; i++)
+                                    {
+                                        if (i <= ViewBag.TotalRating )
+                                        {
+                                            <span class="fa fa-star checked" style="color:orange;"></span>
+                                        }
+                                        else
+                                        {
+                                            <span class="fa fa-star"></span>
+                                        }
+                                    }
+
+                                }
+                            
                         </div>
-                        <p class="num-rate">(12032 đánh giá)</p>
-                        <p class="num-sell">Đã bán 10000+</p>
+                        <p class="num-rate">@ViewBag.SumRating </p>
+                        <p class="num-sell">Đã bán #</p>
                     </div>
                 </div>
                 <div class="info-body">
                     <div class="price">
                         <div class="book-info">
-                            <p class="book-price">@Model.Newcash</p>
+                            <p class="book-price" id="real-price">@Model.Newcash</p>
                             <p class="old-price"><del>@Model.Oldcash</del></p>
                             <div class="tag sale-tag">@Model.Dealpercent%</div>
                         </div>
@@ -117,33 +114,44 @@
                     <div class="ver">
                         <p><span style="color: #8e8e8e;">Phiên bản: </span><strong>Bản thường (Bìa mền + Bookmark)</strong></p>
                         <span class="btn active">Bản thường (Bìa mềm)</span>
-                        <span class="btn">Bản đặc biệt (Bìa cứng + Bookmark)</span>
                     </div>
                     <div class="num-prod">
                         <p>Số lượng:</p>
                         <div class="buttons_added">
                             <input class="minus is-form" type="button" value="-">
-                            <input aria-label="quantity" class="quantity-item" max="20" min="1" name="" type="number" value="1">
+                            <input aria-label="quantity" class="quantity-item" id="input-quantity" max="20" min="1" name="" type="number" value="1">
                             <input class="plus is-form" type="button" value="+">
                         </div>
                         <p>1000+ sản phẩm có sẵn</p>
                     </div>
                 </div>
+                @{
+                    if(User.Identity.IsAuthenticated)
+                    {
+                        <div class="info-footer">
+                            <div class="row">
+                                <div class="col l-6 m-6 c-12" onclick="AddItem()">
+                                    <div class="buttons"> <button class="cart-button"> <span class="add-to-cart">Add to cart</span> <span class="added">Item added</span> <i class="fa fa-shopping-cart"></i> <i class="fa fa-square"></i> </button> </div>
+                                </div>
 
-                <div class="info-footer">
-                    <div class="row">
-                        <div class="col l-6 m-6 c-12">
-                            <div class="cart btn">
-                                <i class="fas fa-shopping-cart"></i>
-                                <p>Thêm vào giỏ hàng</p>
+                                <div class="col l-6 m-6 c-12">
+                                    <p class="buy btn">Mua ngay</p>
+                                </div>
                             </div>
                         </div>
-
-                        <div class="col l-6 m-6 c-12">
-                            <p class="buy btn">Mua ngay</p>
+                    }
+                    if(!User.Identity.IsAuthenticated)
+                    {
+                        <div class="info-footer">
+                            <div class="row">
+                                <div class="col l-6 m-6 c-12">
+                                    <a class="buy btn" href="@Url.Action("Index","LoginReg")">Mua ngay</a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                    }
+                }
+              
             </div>
 
         </div>
@@ -244,231 +252,6 @@
                         </div>
                     }
                 }
-               @* <div class="book">
-                    <a href="../../pages/chi-tiet-san-pham/01-hai-mat-cua-gia-dinh.html">
-                        <div class="book-top">
-                            <img src="../../img/books/book-01-hai-mat-gia-dinh/book-01-1.png" class="book-img">
-                            <img src="../../img/source/freeship.png" alt="" class="freeship-tag">
-                        </div>
-                        <div class="book-bottom">
-                            <p class="book-title">Hai mặt của gia đình</p>
-                            <div class="book-reviews">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                            <div class="book-info">
-                                <p class="book-price">70.800đ</p>
-                                <div class="tag sale-tag">-28%</div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="book">
-                    <a href="../../pages/chi-tiet-san-pham/02-goc-khuat-cua-yeu-thuong.html">
-                        <div class="book-top">
-                            <img src="../../img/books/book-02-goc-khuat-cua-yeu-thuong/book-02-1.jpg" class="book-img">
-                        </div>
-                        <div class="book-bottom">
-                            <p class="book-title">Góc khuất của yêu thương</p>
-                            <div class="book-reviews">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <div class="book-info">
-                                <p class="book-price">66,600đ</p>
-                                <div class="tag sale-tag">-32%</div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="book">
-                    <a href="../../pages/chi-tiet-san-pham/03-chu-nghia-toi-gian.html">
-                        <div class="book-top">
-                            <img src="../../img/books/book-03-chu-nghi-toi-gian/book-03-1.jpg" class="book-img">
-                            <img src="../../img/source/freeship.png" alt="" class="freeship-tag">
-                        </div>
-                        <div class="book-bottom">
-                            <p class="book-title">Chủ nghĩa tối giản</p>
-                            <div class="book-reviews">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                            <div class="book-info">
-                                <p class="book-price">99.200đ</p>
-                                <div class="tag sale-tag">-29%</div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="book">
-                    <a href="../../pages/chi-tiet-san-pham/04-chi-so-vuot-kho.html">
-                        <div class="book-top">
-                            <img src="../../img/books/book-04-chi-so-vuot-kho/book-04-1.jpg" class="book-img">
-                        </div>
-                        <div class="book-bottom">
-                            <p class="book-title">AQ Chỉ số vượt khó</p>
-                            <div class="book-reviews">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <div class="book-info">
-                                <p class="book-price">90.000đ</p>
-                                <div class="tag sale-tag">-10%</div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="book">
-                    <a href="../../pages/chi-tiet-san-pham/05-ga-nghien-giay.html">
-                        <div class="book-top">
-                            <img src="../../img/books/book-05-ga-nghien-giay/book-05-1.jpg" class="book-img">
-                            <img src="../../img/source/freeship.png" alt="" class="freeship-tag">
-                        </div>
-                        <div class="book-bottom">
-                            <p class="book-title">Gã nghiện giày</p>
-                            <div class="book-reviews">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                            <div class="book-info">
-                                <p class="book-price">119.600đ</p>
-                                <div class="tag sale-tag">-25%</div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="book">
-                    <a href="../../pages/chi-tiet-san-pham/06-cang-ky-luat-cang-tu-do.html">
-                        <div class="book-top">
-                            <img src="../../img/books/book-06-cang-ky-luat-cang-tu-do/book-06-1.jpg" class="book-img">
-                        </div>
-                        <div class="book-bottom">
-                            <p class="book-title">Càng kỹ luật càng tự do</p>
-                            <div class="book-reviews">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <div class="book-info">
-                                <p class="book-price">74.200đ</p>
-                                <div class="tag sale-tag">-32%</div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="book">
-                    <a href="../../pages/chi-tiet-san-pham/07-wabi-sabi.html">
-                        <div class="book-top">
-                            <img src="../../img/books/book-07-wabi-sabi/book-07-1.jpg" class="book-img">
-                            <img src="../../img/source/freeship.png" alt="" class="freeship-tag">
-                        </div>
-                        <div class="book-bottom">
-                            <p class="book-title">Wabi Sabi</p>
-                            <div class="book-reviews">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                            <div class="book-info">
-                                <p class="book-price">79.200đ</p>
-                                <div class="tag sale-tag">-20%</div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="book">
-                    <a href="../../pages/chi-tiet-san-pham/08-mat-phai.html">
-                        <div class="book-top">
-                            <img src="../../img/books/book-08-mat-phai/book-08-1.jpg" class="book-img">
-                        </div>
-                        <div class="book-bottom">
-                            <p class="book-title">Mặt phải</p>
-                            <div class="book-reviews">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <div class="book-info">
-                                <p class="book-price">115.000đ</p>
-                                <!-- <div class="tag sale-tag">-10%</div> -->
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="book">
-                    <a href="../../pages/chi-tiet-san-pham/09-tat-ca-deu-la-chuyen-nho.html">
-                        <div class="book-top">
-                            <img src="../../img/books/book-09-tat-ca-deu-la-chuyen-nho/book-09-1.jpg" class="book-img">
-                            <img src="../../img/source/freeship.png" alt="" class="freeship-tag">
-                        </div>
-                        <div class="book-bottom">
-                            <p class="book-title">Tất cả đều là chuyện nhỏ</p>
-                            <div class="book-reviews">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                            <div class="book-info">
-                                <p class="book-price">54.000đ</p>
-                                <div class="tag sale-tag">-10%</div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="book">
-                    <a href="../../pages/chi-tiet-san-pham/10-minh-la-ca.html">
-                        <div class="book-top">
-                            <img src="../../img/books/book-10-minh-la-ca/book-10-1.jpg" class="book-img">
-                        </div>
-                        <div class="book-bottom">
-                            <p class="book-title">Mình là cá, việc của mình là bơi</p>
-                            <div class="book-reviews">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <div class="book-info">
-                                <p class="book-price">67.800đ</p>
-                                <div class="tag sale-tag">-24%</div>
-                            </div>
-                        </div>
-                    </a>
-                </div> *@
-
             </div>
 
         </section>
@@ -479,30 +262,73 @@
 <!-- COMMENTS -->
 <div class="comment-section">
     <div class="post-comment">
-        @foreach (var item in ViewBag.Query)
+            @foreach (var item in ViewBag.Query)
+            {
+                <div class="list">
+                    <div class="user">
+                        <div class="user-image"><img src="~/IMG/source/avatar/User.jpg" alt="Avatar" /></div>
+                        <div class="user-meta">
+                            <div class="user-name" style="margin-bottom:0.3em;">@item.accName.Username</div>
+                            <span>
+                            @{                                
+                                for(int i=1;i<6;i++)
+                                {
+                                    if (i <= item.cmt.StarRating)
+                                    {
+                                        <span class="fa fa-star checked" style="color:orange;"></span>
+                                    }
+                                    else
+                                    {
+                                        <span class="fa fa-star"></span>
+                                    }
+                                }
+                                
+                            }
+                            </span>
+                            <div class="time-post">@item.cmt.CommentTime</div>
+                        </div>
+                    </div>
+                    <div class="comment-post">@item.cmt.CommentContent</div>
+                </div>
+            }
+        </div>
+    @{
+        if(User.Identity.IsAuthenticated)
         {
-            <div class="list">
+            <div class="comment-box">
                 <div class="user">
                     <div class="user-image"><img src="~/IMG/source/avatar/User.jpg" alt="Avatar" /></div>
-                    <div class="user-meta">
-                        <div class="user-name">@item.accName.Username</div>
-                        <div class="time-post">@item.cmt.CommentTime</div>
-                    </div>
+                    <div class="user-name">Add a comment</div>
                 </div>
-                <div class="comment-post">@item.cmt.CommentContent</div>
+                <form id="comment-form">
+                    <div id="full-stars-example">
+                        <div class="rating-group">
+                            <input class="rating__input rating__input--none" name="rating" id="rating-none" value="0" onclick="AddStar()" type="radio">
+                            <label aria-label="No rating" class="rating__label" for="rating-none"><i class="rating__icon rating__icon--none fa fa-ban"></i></label>
+                            <label aria-label="1 star" class="rating__label" for="rating-1"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                            <input class="rating__input" name="rating" id="rating-1" value="1" onclick="AddStar()" type="radio">
+                            <label aria-label="2 stars" class="rating__label" for="rating-2"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                            <input class="rating__input" name="rating" id="rating-2" value="2" onclick="AddStar()" type="radio">
+                            <label aria-label="3 stars" class="rating__label" for="rating-3"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                            <input class="rating__input" name="rating" id="rating-3" value="3" onclick="AddStar()" type="radio" checked>
+                            <label aria-label="4 stars" class="rating__label" for="rating-4"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                            <input class="rating__input" name="rating" id="rating-4" value="4" onclick="AddStar()" type="radio">
+                            <label aria-label="5 stars" class="rating__label" for="rating-5"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                            <input class="rating__input" name="rating" id="rating-5" value="5" onclick="AddStar()" type="radio">
+                        </div>
+                    </div>
+                    <textarea name="comment_content" id="cmt-content" placeholder="Write your thought about this book"></textarea>
+                    <button class="comment_submit" type="button" onclick="PostCMT()">Submit</button>
+                </form>
             </div>
-        }      
-    </div>
-    <div class="comment-box">
-        <div class="user">
-            <div class="user-image"><img src="~/IMG/source/avatar/User.jpg" alt="Avatar" /></div>
-            <div class="user-name">Add a comment</div>
-        </div>
-        <form action="" method="post">
-            <textarea name="comment_content" placeholder="Write your thought about this book"></textarea>
-            <button class="comment_submit" type="submit">Submit</button>
-        </form>
-    </div>
+        }
+        if(!User.Identity.IsAuthenticated)
+        {
+            <div class="div-warning">
+                <a class="login-warning" href="@Url.Action("Index","LoginReg")">Vui lòng đăng nhập để bình luận</a>
+            </div>
+        }
+    }
 </div>
 
 <a href="#top" class="scroll-top">
@@ -521,6 +347,49 @@
 <script src="~/js/comments/data/comments-data.js"></script>
 
 <script src="~/js/app.js"></script>
-<script src="~/js/comments.js"></script>
 <script src="~/js/slider.js"></script>
 
+<script type="text/javascript">
+       
+       
+        function AddItem() {
+            var IdUser = '@ViewBag.UserID';
+            var IdProduct = '@Model.IdBook';
+            var quantity = document.getElementById("input-quantity").value;
+            var ProductPrice = document.getElementById("real-price").innerHTML;
+            $.ajax({
+                type: "POST",
+                url: "/Product/PostItem",
+                data: {idBook : IdProduct, quantity : quantity, idUser : IdUser, PriceItem : ProductPrice},
+                success: function (data) {
+                    
+                },
+                error: function (err) {
+                    alert("That Bai");
+                }
+            });
+        }
+        document.addEventListener("DOMContentLoaded", function (event) {
+
+
+            const cartButtons = document.querySelectorAll('.cart-button');
+
+            cartButtons.forEach(button => {
+
+                button.addEventListener('click', cartClick);
+
+            });
+
+            function cartClick() {
+                let button = this;
+                button.classList.add('clicked');
+            }
+        });
+
+        $(document).ready(function () {
+            var IdUser = '@ViewBag.UserID';
+            console.log(IdUser);
+        });
+
+       
+</script>

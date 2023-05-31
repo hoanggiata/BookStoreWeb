@@ -1,0 +1,261 @@
+﻿
+@{
+    Layout = null;
+    <link href="@Url.Content("~/css/Cart.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/js/Cart.js")"></script>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="@Url.Content("~/IMG/source/icon-logo.ico")" rel="icon" type="image/x-icon" />
+    <title>Shopping Cart</title>
+        
+}
+<div class="card">
+    <div class="row">
+        <div class="col-md-8 cart">
+            <div class="title">
+                <div class="row">
+                    <div class="col"><h4><b>Shopping Cart</b></h4></div>
+                    @{
+                        if(ViewBag.List_Item == null)
+                        {
+                            <div class="col align-self-center text-right text-muted">0 items</div>
+                        }
+                        else
+                        {
+                            <div class="col align-self-center text-right text-muted">@ViewBag.List_Item.Count items</div>
+                        }
+                    }
+                    
+                </div>
+            </div>
+            @{
+                if (ViewBag.CartItem !=null)
+                {
+                    foreach (var item in ViewBag.CartItem)
+                    {
+                        <div class="row border-top get-product" id="@item.BookId">
+                            <div class="row main align-items-center" style="margin-left:-15px !important;">
+                                <div class="col-2"><img class="img-fluid" src="@item.Image"></div>
+                                <div class="col">
+                                    <div class="row text-muted">@item.Cate</div>
+                                    <div class="row">@item.BookName</div>
+                                    <input type="hidden" value="@item.Fixed_Price" class="input-hidden" id="@item.BookId">
+                                    <input type="hidden" value="@item.IdCart" class="post-item">
+                                </div>
+                                <div class="col">
+                                    <a href="#" id="quantity-minus" onclick="UpdateQuantity('-1','@item.BookId')">-</a><a href="#" class="border quantity-item" id="quantity-@item.BookId">@item.Quantity</a><a href="#" onclick="UpdateQuantity('1','@item.BookId')">+</a>
+                                </div>
+                                <div class="col"><span id="price-@item.BookId">@item.product_Price</span><span class="close @item.BookId" onclick="RemoveItem(this,'@item.BookId')">&#10005;</span></div>
+                            </div>
+                        </div>
+
+                    }
+                }
+                else
+                {
+                    
+                }
+            }
+           
+            <div class="back-to-shop"><a href="@Url.Action("Index","Home")" style="text-decoration:none;">&leftarrow;</a><a class="text-muted" href="@Url.Action("Index","Home")" style="text-decoration:none;">Back to shop</a></div>
+        </div>
+        <div class="col-md-4 summary">
+            <div><h5><b>Summary</b></h5></div>
+            <hr>
+            <div class="row">
+                
+            </div>
+            <form>
+                <p style="font-size:16px; font-weight:400;">ĐỊA CHỈ</p>
+                <input class="input-address" placeholder="Nhập Địa Chỉ Giao Hàng" />
+                <p>SHIPPING</p>
+                <select><option class="text-muted">Giao Hàng Tận Nơi</option></select>
+                <p>Tên Người Nhận</p>
+                <input id="code" placeholder="Tên Người Nhận">
+            </form>
+            <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                <div class="col">TOTAL PRICE</div>
+                <div class="col text-right" id="total-price">&euro; 0</div>
+            </div>
+            <button class="btn trigger-btn" data-toggle="modal" onclick="CheckOut()" href="#myModal">CHECKOUT</button>
+            <!-- Modal HTML -->
+            <div id="myModal" class="modal fade" aria-hidden="true" style="display: none;">
+                <div class="modal-dialog modal-confirm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="icon-box">
+                                <i class="material-icons">&#xE876;</i>
+                            </div>
+                            <h4 class="modal-title">Awesome!</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p class="text-center">Your booking has been confirmed. Check your email for detials.</p>
+                        </div>
+                        <div class="modal-footer" href="@Url.Action("Index","Home")">
+                            <a class="btn btn-success btn-block" href="@Url.Action("Index","Home")">OK</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript">
+    const quantity = document.getElementsByClassName("quantity-item").innerHTML;
+        if(quantity == 1)
+        {
+            document.getElementById("quantity-minus").style.visibility = 'hidden';
+        }
+    var price_fixed = document.getElementsByClassName("input-hidden");
+  
+    function PostRemoveItem(abc)
+    {
+        $.ajax({
+            type: "POST",
+            url: "/Cart/RemoveItem",
+            data: { id: abc },
+            success: function (data) {
+                alert(data);
+            },
+            error: function (err) {
+                alert("That Bai");
+            }
+        });
+    }
+    function RemoveItem(obj,abc)
+    {
+        let item = document.getElementById(abc);
+        //Remove item from database
+        PostRemoveItem(abc)
+        //Remove item from FrontEnd
+        while(item.hasChildNodes())
+            item.removeChild(item.firstChild)
+
+        item.remove();
+               
+    }
+    function UpdateQuantity(intValue,product_id)
+    {
+        var temp = "quantity-";
+        let text = temp.concat(product_id);
+        const quantity = document.getElementById(text).innerHTML;
+        var result = parseInt(quantity) + parseInt(intValue);
+        document.getElementById(text).innerHTML = result;
+        
+        $.ajax({
+            type: "POST",
+            url: "/Cart/UpdateQuantity",
+            data: { id: product_id, quantity : result },
+            success: function (data) {
+                alert(data);
+            },
+            error: function (err) {
+                alert("That Bai");
+            }
+        });
+        UpdatePrice(result, product_id)
+        
+    }
+   function UpdatePrice(quantity,product_id)
+    {
+        var temp = "price-";
+        var text = temp.concat(product_id);
+        var price = document.getElementById(text).innerHTML;
+        var priceInt = parseFloat(price);
+        var fixPirce = 0;
+        var result = 0;
+
+        for (var i = 0; i < price_fixed.length; i++) {
+            if(price_fixed[i].id == product_id)
+            {
+                fixPirce = price_fixed[i].value;
+            }
+        }
+        if (quantity == 1) {
+            document.getElementById(text).innerHTML = parseFloat(fixPirce).toFixed(3);
+            var postPrice = parseFloat(fixPirce).toFixed(3).toString();
+             $.ajax({
+                type: "POST",
+                url: "/Cart/UpdatePrice",
+                data: {id : product_id, price : postPrice, quantity : quantity},
+                success: function(data)
+                {
+                   
+                },
+                error: function(err)
+                {
+                    alert("That Bai");
+                }
+            });
+        }
+        else
+        {
+            result = fixPirce * quantity;
+            document.getElementById(text).innerHTML = parseFloat(result).toFixed(3);
+            var postPrice2 = parseFloat(result).toFixed(3).toString();
+            console.log(postPrice2);
+            $.ajax({
+                type: "POST",
+                url: "/Cart/UpdatePrice",
+                data: { id: product_id, price: postPrice2, quantity: quantity },
+                success: function(data)
+                {
+                    
+                },
+                error: function(err)
+                {
+                    alert("That Bai");
+                }
+            });
+        }
+    }
+
+    function GetTotalPrice()
+    {
+        $.ajax({
+            type: "GET",
+            url: "/Cart/GetTotalPrice",
+            datatype: "json",
+            success: function(data)
+            {
+                document.getElementById("total-price").innerHTML = data;
+            },
+            error: function(err)
+            {
+                alert('error');
+            }
+        });
+    }
+    function CheckOut()
+    {
+          var array_idCart = document.getElementsByClassName("post-item");
+          var array = new Array();
+            for (var i = 0; i < array_idCart.length; i++) {
+                array.push(array_idCart[i].value.toString());
+            }
+
+        $.ajax({
+            type: "POST",
+            url: "/Cart/CheckOut",
+            traditional: true,
+            data: {list_id : array},
+            success: function(data)
+            {
+                
+            },
+            error: function(err)
+            {
+                alert('error');
+            }
+        });
+    }
+    if(ViewBag.CartItem !=null)
+    {
+        window.onload = GetTotalPrice()
+    }
+    
+</script>

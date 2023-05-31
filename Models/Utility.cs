@@ -3,6 +3,9 @@ using System.Text;
 using System.Security.Cryptography;
 using System.Globalization;
 using System.Security.Claims;
+using System.Net.Mail;
+using System.Net;
+using System.Security.Principal;
 
 namespace BookStoreWeb.Models
 {
@@ -50,7 +53,34 @@ namespace BookStoreWeb.Models
             CultureList.Sort();
             return CultureList;
         }
+        public static string CreateRandomPassword(int length = 15)
+        {
+            // Create a string of characters, numbers, and special characters that are allowed in the password
+            string validChars = "ABCDEFGHJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*?_-";
+            Random random = new Random();
 
-       
+            // Select one random character at a time from the string
+            // and create an array of chars
+            char[] chars = new char[length];
+            for (int i = 0; i < length; i++)
+            {
+                chars[i] = validChars[random.Next(0, validChars.Length)];
+            }
+            return new string(chars);
+        }
+        public static void SendEmail(Account getAccount,string newPass)
+        {
+            MailMessage mm = new MailMessage("tahoanggia810@gmail.com", getAccount.Email.Trim());
+            mm.Subject = "Password Recovery";
+            mm.Body = string.Format("Hi {0},<br /><br />Your new password is {1}<br /><br />Thank You.", getAccount.Username, newPass.ToString());
+            mm.IsBodyHtml = true;
+            SmtpClient smtp = new SmtpClient();
+            smtp.UseDefaultCredentials = false;
+            smtp.Credentials = new NetworkCredential("tahoanggia810@gmail.com", "reuznhrjgiemzenu");
+            smtp.Host = "smtp.gmail.com";
+            smtp.EnableSsl = true;
+            smtp.Port = 587;
+            smtp.Send(mm);
+        }
     }
 }
